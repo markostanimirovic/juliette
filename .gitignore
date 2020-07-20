@@ -1,2 +1,8 @@
-.idea
-node_modules
+# dependencies
+/node_modules
+
+# compiled output
+/dist
+
+# IDEs and editors
+/.idea

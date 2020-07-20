@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/naming-convention": "error",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "dot-notation": "error",
+    "indent": "off",
+    "new-parens": "error",
+    "no-bitwise": "off",
+    "no-console": ["error", {
+      "allow": ["table"]
+    }],
+    "no-extra-boolean-cast": "off",
+    "no-restricted-imports": ["error", "rxjs/Rx"],
+    "no-shadow": [
+      "error",
+      {
+        "hoist": "all"
+      }
+    ],
+    "no-undef-init": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-object-spread": "error",
+    "prefer-spread": "error",
+    "radix": "error"
+  }
+}
