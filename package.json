@@ -1,7 +1,7 @@
 {
   "name": "juliette",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.0",
+  "description": "Reactive State Management Powered by RxJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
