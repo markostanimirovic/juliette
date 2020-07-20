@@ -15,11 +15,14 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/ban-ts-ignore": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": [
+      "error",
+      {
+        "allowArgumentsExplicitlyTypedAsAny": true
+      }
+    ],
     "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/naming-convention": "error",
-    "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-inferrable-types": "error",
@@ -29,9 +32,6 @@
     "indent": "off",
     "new-parens": "error",
     "no-bitwise": "off",
-    "no-console": ["error", {
-      "allow": ["table"]
-    }],
     "no-extra-boolean-cast": "off",
     "no-restricted-imports": ["error", "rxjs/Rx"],
     "no-shadow": [
