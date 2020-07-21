@@ -2,6 +2,8 @@
 
 Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)
 
+[![npm version](https://badge.fury.io/js/juliette.svg)](https://badge.fury.io/js/juliette)
+
 ## Description
 
 Juliette is a reactive state management container inspired by [NgRx](https://ngrx.io/).

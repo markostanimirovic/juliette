@@ -32,7 +32,9 @@
     "RxJS",
     "NgRx",
     "Angular",
-    "Redux"
+    "Redux",
+    "TypeScript",
+    "State Management"
   ],
   "files": [
     "dist"
