@@ -1,18 +1,19 @@
 {
   "name": "juliette",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Reactive State Management Powered by RxJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
     "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "prettier": "prettier --check . --ignore-path .lintignore",
-    "prettier:fix": "prettier --write . --ignore-path .lintignore"
+    "prettier:fix": "prettier --write . --ignore-path .lintignore",
+    "prepublishOnly": "npm ci && npm run lint && npm run build"
   },
   "husky": {
     "hooks": {
@@ -21,9 +22,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stanimirovic/juliette.git"
+    "url": "git+https://github.com/stanimirovic/juliette.git"
   },
   "homepage": "https://github.com/stanimirovic/juliette",
+  "bugs": {
+    "url": "https://github.com/stanimirovic/juliette/issues"
+  },
+  "keywords": [
+    "RxJS",
+    "NgRx",
+    "Angular",
+    "Redux"
+  ],
+  "files": [
+    "dist"
+  ],
   "author": "Marko Stanimirovic",
   "license": "ISC",
   "devDependencies": {
