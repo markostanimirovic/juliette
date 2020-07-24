@@ -7,14 +7,10 @@ import { Component, OnInit } from '@angular/core';
       juliette works!
     </p>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class JulietteComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { JulietteComponent } from './juliette.component';
 
-
-
 @NgModule({
   declarations: [JulietteComponent],
-  imports: [
-  ],
-  exports: [JulietteComponent]
+  imports: [],
+  exports: [JulietteComponent],
 })
-export class JulietteModule { }
+export class JulietteModule {}

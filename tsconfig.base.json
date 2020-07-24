@@ -15,19 +15,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "juliette": [
-        "dist/juliette/juliette",
-        "dist/juliette"
-      ],
-      "juliette-ng": [
-        "dist/juliette-ng/juliette-ng",
-        "dist/juliette-ng"
-      ]
+      "juliette": ["dist/juliette/juliette", "dist/juliette"],
+      "juliette-ng": ["dist/juliette-ng/juliette-ng", "dist/juliette-ng"]
     }
   },
   "angularCompilerOptions": {

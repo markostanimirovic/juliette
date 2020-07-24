@@ -1,12 +1,28 @@
 {
-  "name": "juliette",
-  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build juliette && ng build juliette-ng",
+    "build:prod": "ng build juliette --prod && ng build juliette-ng --prod",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "npm run prettier && npm run eslint",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
+    "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
+    "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
+    "prettier": "prettier --check . --ignore-path .lintignore",
+    "prettier:fix": "prettier --write . --ignore-path .lintignore",
+    "update-version:patch": "node ./scripts/update-version.js VERSION_TYPE=patch",
+    "update-version:minor": "node ./scripts/update-version.js VERSION_TYPE=minor",
+    "update-version:major": "node ./scripts/update-version.js VERSION_TYPE=major",
+    "copy-readme": "cp -r ./README.md ./dist/juliette && cp -r ./README.md ./dist/juliette-ng",
+    "publish:juliette": "cd ./dist/juliette && npm publish",
+    "publish:juliette-ng": "cd ./dist/juliette-ng && npm publish",
+    "publish:all": "npm run copy-readme && npm run publish:juliette && npm run publish:juliette-ng"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git add . && npm run lint:fix && npm run build:prod"
+    }
   },
   "private": true,
   "dependencies": {
@@ -28,7 +44,13 @@
     "@angular/cli": "~10.0.3",
     "@angular/compiler-cli": "~10.0.4",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
     "ng-packagr": "^10.0.0",
+    "prettier": "^2.0.5",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"

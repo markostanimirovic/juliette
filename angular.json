@@ -106,13 +106,8 @@
             "polyfills": "projects/playground/src/polyfills.ts",
             "tsConfig": "projects/playground/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "projects/playground/src/favicon.ico",
-              "projects/playground/src/assets"
-            ],
-            "styles": [
-              "projects/playground/src/styles.scss"
-            ],
+            "assets": ["projects/playground/src/favicon.ico", "projects/playground/src/assets"],
+            "styles": ["projects/playground/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -164,6 +159,7 @@
           }
         }
       }
-    }},
-  "defaultProject": "juliette"
+    }
+  },
+  "defaultProject": "playground"
 }
