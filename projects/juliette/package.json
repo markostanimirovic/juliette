@@ -1,6 +1,6 @@
 {
   "name": "juliette",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "peerDependencies": {
     "rxjs": "^6.5.5"
   },
