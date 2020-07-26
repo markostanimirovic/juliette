@@ -2,9 +2,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/spec",
-    "types": ["jasmine"]
-  },
-  "files": ["src/test.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+    "outDir": "../../dist/juliette",
+    "declaration": true,
+    "inlineSources": true,
+    "importHelpers": false
+  }
 }

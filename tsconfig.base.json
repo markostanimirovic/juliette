@@ -17,7 +17,7 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "juliette": ["dist/juliette/juliette", "dist/juliette"],
+      "juliette": ["dist/juliette/public-api"],
       "juliette-ng": ["dist/juliette-ng/juliette-ng", "dist/juliette-ng"]
     }
   },

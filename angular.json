@@ -3,39 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "juliette": {
-      "projectType": "library",
-      "root": "projects/juliette",
-      "sourceRoot": "projects/juliette/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/juliette/tsconfig.lib.json",
-            "project": "projects/juliette/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/juliette/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/juliette/src/test.ts",
-            "tsConfig": "projects/juliette/tsconfig.spec.json",
-            "karmaConfig": "projects/juliette/karma.conf.js"
-          }
-        }
-      }
-    },
     "juliette-ng": {
       "projectType": "library",
       "root": "projects/juliette-ng",
       "sourceRoot": "projects/juliette-ng/src",
-      "prefix": "lib",
+      "prefix": "juliette",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -47,14 +19,6 @@
             "production": {
               "tsConfig": "projects/juliette-ng/tsconfig.lib.prod.json"
             }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/juliette-ng/src/test.ts",
-            "tsConfig": "projects/juliette-ng/tsconfig.spec.json",
-            "karmaConfig": "projects/juliette-ng/karma.conf.js"
           }
         }
       }
@@ -161,5 +125,5 @@
       }
     }
   },
-  "defaultProject": "juliette"
+  "defaultProject": "juliette-ng"
 }
