@@ -1,0 +1,14 @@
+{
+  "author": "Marko Stanimirović",
+  "description": "Reactive State Management Powered by RxJS",
+  "keywords": ["RxJS", "NgRx", "Redux", "Angular", "React", "TypeScript", "State Management"],
+  "license": "MIT",
+  "homepage": "https://github.com/stanimirovic/juliette",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanimirovic/juliette.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stanimirovic/juliette/issues"
+  }
+}

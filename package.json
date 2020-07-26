@@ -3,7 +3,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build juliette && ng build juliette-ng",
-    "build:prod": "ng build juliette --prod && ng build juliette-ng --prod && npm run copy-readme",
+    "build:prod": "ng build juliette --prod && ng build juliette-ng --prod",
     "test": "ng test",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
@@ -14,12 +14,11 @@
     "update-version:patch": "node ./scripts/update-version.js VERSION_TYPE=patch",
     "update-version:minor": "node ./scripts/update-version.js VERSION_TYPE=minor",
     "update-version:major": "node ./scripts/update-version.js VERSION_TYPE=major",
-    "copy-readme": "cp -r ./README.md ./dist/juliette && cp -r ./README.md ./dist/juliette-ng",
     "publish-libs": "node ./scripts/publish.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add . && npm run lint:fix && npm run build:prod"
+      "pre-commit": "npm run lint:fix && git add . && npm run build:prod"
     }
   },
   "private": true,
