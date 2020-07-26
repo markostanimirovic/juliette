@@ -1,24 +1,39 @@
 const { execSync } = require('child_process');
 const { writeFileSync } = require('fs');
-const { join } = require('path');
+const readline = require('readline');
+const { juliettePath, julietteNgPackageJsonPath } = require('./paths');
 
-const projectsPath = join(__dirname, '..', 'projects');
-const juliettePath = join(projectsPath, 'juliette');
-const julietteNgPackageJsonPath = join(projectsPath, 'juliette-ng', 'package.json');
+const getVersionType = () => {
+  const versionTypeReadline = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const allVersionTypes = ['patch', 'minor', 'major'];
+  const defaultVersionType = allVersionTypes[0];
 
-const versionType = process.env.VERSION_TYPE || 'patch';
-const version = execSync(`cd ${juliettePath} && npm version ${versionType}`)
-  .toString()
-  .replace(/[^0-9.]/g, '');
-
-const julietteNgPackageJson = require(julietteNgPackageJsonPath);
-const updatedJulietteNgPackageJson = {
-  ...julietteNgPackageJson,
-  version,
-  peerDependencies: {
-    ...julietteNgPackageJson.peerDependencies,
-    juliette: version,
-  },
+  return new Promise(resolve =>
+    versionTypeReadline.question(`Enter version type (${allVersionTypes.join('/')}): `, versionType => {
+      versionTypeReadline.close();
+      resolve(allVersionTypes.indexOf(versionType) > -1 ? versionType : defaultVersionType);
+    }),
+  );
 };
 
-writeFileSync(julietteNgPackageJsonPath, JSON.stringify(updatedJulietteNgPackageJson, null, 2));
+(async () => {
+  const versionType = await getVersionType();
+
+  console.log('Updating juliette version...');
+  const version = execSync(`cd ${juliettePath} && npm version ${versionType}`)
+    .toString()
+    .replace(/[^0-9.]/g, '');
+
+  const julietteNgPackageJson = require(julietteNgPackageJsonPath);
+  const updatedJulietteNgPackageJson = {
+    ...julietteNgPackageJson,
+    version,
+    peerDependencies: {
+      ...julietteNgPackageJson.peerDependencies,
+      juliette: version,
+    },
+  };
+
+  console.log('Updating juliette-ng version...');
+  writeFileSync(julietteNgPackageJsonPath, JSON.stringify(updatedJulietteNgPackageJson, null, 2));
+})();

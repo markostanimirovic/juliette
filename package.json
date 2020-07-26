@@ -11,10 +11,8 @@
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "prettier": "prettier --check . --ignore-path .lintignore",
     "prettier:fix": "prettier --write . --ignore-path .lintignore",
-    "update-version:patch": "node ./scripts/update-version.js VERSION_TYPE=patch",
-    "update-version:minor": "node ./scripts/update-version.js VERSION_TYPE=minor",
-    "update-version:major": "node ./scripts/update-version.js VERSION_TYPE=major",
-    "publish-libs": "node ./scripts/publish.js"
+    "update-version": "node scripts/update-version.js",
+    "publish-libs": "node scripts/publish.js"
   },
   "husky": {
     "hooks": {
