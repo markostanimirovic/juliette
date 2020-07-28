@@ -1,9 +1,10 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { StateConfig, Class, Store, fromEffectsObjectsToEffects, registerEffects } from 'juliette';
 
-export function registerEffectsFactory(store: Store, ...effectsObjects: any[]): void {
+export function registerEffectsFactory(store: Store, ...effectsObjects: any[]): () => null {
   const effects = fromEffectsObjectsToEffects(effectsObjects);
   registerEffects(store, effects);
+  return () => null;
 }
 
 @NgModule()
