@@ -1,0 +1,15 @@
+<ng-container *ngIf="viewModel$ | async as vm">
+  <button (click)="fetchUsers()">
+    Fetch Users
+  </button>
+
+  <div *ngIf="vm.showLoading; else users">
+    Loading...
+  </div>
+
+  <ng-template #users>
+    <div *ngFor="let user of vm.users">
+      {{ user.name }}
+    </div>
+  </ng-template>
+</ng-container>

@@ -23,7 +23,7 @@
         }
       }
     },
-    "playground": {
+    "playground-ng": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -57,29 +57,29 @@
           "strict": true
         }
       },
-      "root": "projects/playground",
-      "sourceRoot": "projects/playground/src",
+      "root": "projects/playground-ng",
+      "sourceRoot": "projects/playground-ng/src",
       "prefix": "pg",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/playground",
-            "index": "projects/playground/src/index.html",
-            "main": "projects/playground/src/main.ts",
-            "polyfills": "projects/playground/src/polyfills.ts",
-            "tsConfig": "projects/playground/tsconfig.app.json",
+            "outputPath": "dist/playground-ng",
+            "index": "projects/playground-ng/src/index.html",
+            "main": "projects/playground-ng/src/main.ts",
+            "polyfills": "projects/playground-ng/src/polyfills.ts",
+            "tsConfig": "projects/playground-ng/tsconfig.app.json",
             "aot": true,
-            "assets": ["projects/playground/src/favicon.ico", "projects/playground/src/assets"],
-            "styles": ["projects/playground/src/styles.scss"],
+            "assets": ["projects/playground-ng/src/favicon.ico", "projects/playground-ng/src/assets"],
+            "styles": ["projects/playground-ng/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/playground/src/environments/environment.ts",
-                  "with": "projects/playground/src/environments/environment.prod.ts"
+                  "replace": "projects/playground-ng/src/environments/environment.ts",
+                  "with": "projects/playground-ng/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -108,18 +108,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "playground:build"
+            "browserTarget": "playground-ng:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "playground:build:production"
+              "browserTarget": "playground-ng:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "playground:build"
+            "browserTarget": "playground-ng:build"
           }
         }
       }

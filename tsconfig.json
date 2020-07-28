@@ -8,7 +8,7 @@
       "path": "./projects/juliette-ng/tsconfig.lib.json"
     },
     {
-      "path": "./projects/playground/tsconfig.app.json"
+      "path": "./projects/playground-ng/tsconfig.app.json"
     }
   ]
 }
