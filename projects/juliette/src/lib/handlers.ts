@@ -1,18 +1,26 @@
-export interface StateConfig<T> {
-  stateName: string;
-  initialState: T;
-}
+import {
+  HandlerCreatorWithoutPayload,
+  HandlerCreatorWithPayload,
+  ReducerWithoutPayload,
+  ReducerWithPayload,
+} from './models';
 
-export interface HandlerConfig {
-  type: string;
-  stateName: string;
-  reducer?: any;
-  payload?: any;
-}
+export function createHandler<S, P>(
+  type: string,
+  stateKey: string,
+  reducer?: ReducerWithPayload<S, P>,
+): HandlerCreatorWithPayload<S, P>;
 
-export const createHandler = (type: string, stateName: string, reducer?: any) => (payload?: any): HandlerConfig => ({
-  type,
-  stateName,
-  reducer,
-  payload,
-});
+export function createHandler<S>(
+  type: string,
+  stateKey: string,
+  reducer?: ReducerWithoutPayload<S>,
+): HandlerCreatorWithoutPayload<S>;
+
+export function createHandler<S, P>(
+  type: string,
+  stateKey: string,
+  reducer?: ReducerWithPayload<S, P> | ReducerWithoutPayload<S>,
+): HandlerCreatorWithPayload<S, P> | HandlerCreatorWithoutPayload<S> {
+  return (payload: P) => ({ type, stateKey, reducer, payload });
+}

@@ -1,6 +1,6 @@
 // TODO: move to juliette-ng
 
-import { JULIETTE_EFFECT } from './effects';
+import { JULIETTE_EFFECT } from 'juliette';
 
 export const fromEffectsObjectsToEffects = (effectsObjects: any[]): any[] =>
   effectsObjects.reduce((acc, objectWithEffects) => {
@@ -10,7 +10,7 @@ export const fromEffectsObjectsToEffects = (effectsObjects: any[]): any[] =>
     return [...acc, ...effectsFromCurrentObject];
   }, []);
 
-interface Class<T> {
+export interface Class<T> {
   new (...args: unknown[]): T;
   prototype: T;
 }

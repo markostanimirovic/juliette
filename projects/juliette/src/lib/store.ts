@@ -1,37 +1,39 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { fromStateConfigToState } from './helpers';
-import { HandlerConfig, StateConfig } from './handlers';
+import { map } from 'rxjs/operators';
+import { Handler, Selector } from './models';
 
-export class Store {
-  private state: BehaviorSubject<any>;
-  private handlers = new Subject();
+export class Store<T> {
+  private state: BehaviorSubject<T>;
+  private handlers = new Subject<Handler>();
 
-  debugMode = false;
+  state$: Observable<T>;
+  handlers$: Observable<Handler>;
 
-  state$: Observable<any>;
-  handlers$: Observable<any>;
-
-  constructor(stateConfig: StateConfig<any> | StateConfig<any>[]) {
-    this.state = new BehaviorSubject(fromStateConfigToState(stateConfig));
+  constructor(initialState: T) {
+    this.state = new BehaviorSubject(initialState);
     this.state$ = this.state.asObservable();
     this.handlers$ = this.handlers.asObservable();
   }
 
-  dispatch(handler: HandlerConfig): void {
-    if (handler.reducer) {
-      const newStateChunk = handler.reducer(this.state.value[handler.stateName], handler.payload);
-      this.state.next({ ...this.state.value, [handler.stateName]: newStateChunk });
-    }
+  dispatch(handler: Handler): void {
+    const reducer = (handler as any).reducer;
 
-    if (this.debugMode) this.debugModeFn(handler);
+    if (reducer) {
+      const state = (this.state.value as any)[handler.stateKey];
+      const payload = (handler as any).payload;
+
+      this.state.next({ ...this.state.value, [handler.stateKey]: reducer(state, payload) });
+    }
 
     this.handlers.next(handler);
   }
 
-  debugModeFn = (handler: HandlerConfig): void => {
-    console.log('%c%s', 'color: #00e600', handler.type);
-    console.groupCollapsed('%c⧭', 'color: #0088cc', 'STATE TREE:');
-    console.table(this.state.value);
-    console.groupEnd();
-  };
+  select<K extends keyof T>(key: K): Observable<T[K]>;
+
+  select<R>(selector: Selector<T, R>): Observable<R>;
+
+  select<K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): Observable<R | T[K]> {
+    const mapFn = typeof keyOrSelector === 'function' ? keyOrSelector : (state: T): T[K] => state[keyOrSelector];
+    return this.state$.pipe(map<T, R | T[K]>(mapFn));
+  }
 }

@@ -1,17 +1,14 @@
 import { Observable } from 'rxjs';
 import { Store } from './store';
+import { Effect, Handler } from './models';
 
-export const MST_NGRX_EFFECT = 'MstNgrxEffect';
+export const JULIETTE_EFFECT = 'Juliette Effect';
 
-export const createEffect = (effect: any): { type: string; [key: string]: any } => {
-  effect.type = MST_NGRX_EFFECT;
-  return effect;
-};
+export const createEffect = (handler$: Observable<Handler | void>): Effect => ({
+  handler$,
+  type: JULIETTE_EFFECT,
+});
 
-export const registerEffects = (store: Store, effects: Observable<any>[]): void => {
-  effects.forEach(effect =>
-    effect.subscribe(handlers => {
-      Array.isArray(handlers) ? handlers.forEach(handler => store.dispatch(handler)) : store.dispatch(handlers);
-    }),
-  );
+export const registerEffects = <T>(store: Store<T>, effects: Effect[]): void => {
+  effects.forEach(({ handler$ }) => handler$.subscribe(handler => handler && store.dispatch(handler)));
 };
