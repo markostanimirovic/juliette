@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Handler, Selector } from './models';
+import { debug } from './debug';
 
 export class Store<T> {
   private state: BehaviorSubject<T>;
@@ -37,3 +38,10 @@ export class Store<T> {
     return this.state$.pipe(map<T, R | T[K]>(mapFn));
   }
 }
+
+export const createStore = <T>(initialState: T, debugMode = false): Store<T> => {
+  const store = new Store(initialState);
+  if (debugMode) debug(store);
+
+  return store;
+};

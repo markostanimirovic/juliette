@@ -27,6 +27,6 @@ export type HandlerCreator<S, P> = HandlerCreatorWithPayload<S, P> | HandlerCrea
 export type Selector<S, R> = (state: S) => R;
 
 export interface Effect {
-  handler$: Observable<Handler | void>;
+  source$: Observable<Handler | void>;
   type: string;
 }
