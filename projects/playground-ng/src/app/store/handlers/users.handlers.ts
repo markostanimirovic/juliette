@@ -13,14 +13,13 @@ export const initialState: State = {
   showLoading: false,
 };
 
-export const fetchUsers = createHandler<State>(
-  '[Users] Fetch Users',
-  stateKey,
-  (state: State): State => ({ ...state, showLoading: true }),
-);
+export const fetchUsers = createHandler<State>('[Users] Fetch Users', stateKey, state => ({
+  ...state,
+  showLoading: true,
+}));
 
 export const fetchUsersSuccess = createHandler<State, { users: User[] }>(
   '[Users] Fetch Users Success',
   stateKey,
-  (state: State, { users }: { users: User[] }): State => ({ ...state, users, showLoading: false }),
+  (state, { users }) => ({ ...state, users, showLoading: false }),
 );

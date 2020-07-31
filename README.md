@@ -30,7 +30,11 @@ React or any JavaScript application.
 
 ## Installation
 
---
+Run `npm install --save juliette` to install core Juliette library.
+
+If you are using Angular, install additional package by running `npm install --save juliette-ng` command.
+
+If you are using React, install additional package by running `npm install --save juliette-react` command.
 
 ## Usage
 
