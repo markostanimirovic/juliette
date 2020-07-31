@@ -1,17 +1,26 @@
 import { Store } from './store';
 import { take, withLatestFrom } from 'rxjs/operators';
+import { Handler } from './models';
 
 export const debug = <T>(store: Store<T>): void => {
   store.state$.pipe(take(1)).subscribe(state => {
-    console.groupCollapsed('%c⧭', 'color: #0088cc', 'INITIAL STATE TREE:');
-    console.table(state);
-    console.groupEnd();
+    logState(state);
   });
 
   store.handlers$.pipe(withLatestFrom(store.state$)).subscribe(([handler, state]) => {
-    console.log('%c%s', 'color: #00e600', handler.type);
-    console.groupCollapsed('%c⧭', 'color: #0088cc', 'STATE TREE:');
-    console.table(state);
-    console.groupEnd();
+    logHandler(handler);
+    logState(state);
   });
+};
+
+const loggingStyle = 'color: #0099A5; font:1em Comic Sans MS; font-weight: bold';
+
+const logState = <T>(state: T): void => {
+  console.groupCollapsed('%c🪐 State:', loggingStyle);
+  console.log(state);
+  console.groupEnd();
+};
+
+const logHandler = (handler: Handler): void => {
+  console.log(`%c🚀 Handler: ${handler.type}`, loggingStyle);
 };
