@@ -7,7 +7,7 @@
 ## Description
 
 Juliette is a reactive state management container inspired by [NgRx](https://ngrx.io/).
-It reduces NgRx boilerplate, simplifies the configuration, facilitates state accessibility
+It reduces Redux boilerplate, eliminates reducer's ifology, simplifies the configuration
 and introduces NgRx architecture into the framework independent world.
 Juliette is a TypeScript friendly library and can be used in Angular,
 React or any JavaScript application.
@@ -16,11 +16,11 @@ React or any JavaScript application.
 
 --
 
-### Simplified Configuration
+### Eliminated Reducer's Ifology
 
 --
 
-### Facilitated State Accessibility
+### Simplified Configuration
 
 --
 
