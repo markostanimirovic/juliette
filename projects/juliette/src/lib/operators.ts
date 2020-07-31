@@ -9,17 +9,17 @@ import {
   HandlerWithPayload,
 } from './models';
 
-export function ofType<S, P>(
-  handlerCreator: HandlerCreatorWithPayload<S, P>,
-): OperatorFunction<Handler, HandlerWithPayload<S, P>>;
-
 export function ofType<S>(
   handlerCreator: HandlerCreatorWithoutPayload<S>,
 ): OperatorFunction<Handler, HandlerWithoutPayload<S>>;
 
-export function ofType(...handlerCreators: HandlerCreator<unknown, unknown>[]): MonoTypeOperatorFunction<Handler>;
+export function ofType<S, P>(
+  handlerCreator: HandlerCreatorWithPayload<S, P>,
+): OperatorFunction<Handler, HandlerWithPayload<S, P>>;
 
-export function ofType(...handlerCreators: HandlerCreator<unknown, unknown>[]): MonoTypeOperatorFunction<Handler> {
+export function ofType(...handlerCreators: HandlerCreator<any, any>[]): MonoTypeOperatorFunction<Handler>;
+
+export function ofType(...handlerCreators: HandlerCreator<any, any>[]): MonoTypeOperatorFunction<Handler> {
   return filter((handler: Handler) =>
     handlerCreators.some(handlerCreator => handlerCreator(null).type === handler.type),
   );

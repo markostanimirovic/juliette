@@ -13,7 +13,7 @@ export class EffectsRootModule {
 
 @NgModule()
 export class EffectsModule {
-  static forRoot(classesWithEffects: Type<any>[]): ModuleWithProviders<EffectsRootModule> {
+  static forRoot(classesWithEffects: Type<any>[] = []): ModuleWithProviders<EffectsRootModule> {
     return {
       ngModule: EffectsRootModule,
       providers: [...fromClassesWithEffectsToClassProviders(CLASSES_WITH_ROOT_EFFECTS, classesWithEffects)],
