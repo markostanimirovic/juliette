@@ -1,27 +1,22 @@
-import { APP_INITIALIZER, ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { CLASSES_WITH_ROOT_EFFECTS } from './tokens';
+import { fromClassesWithEffectsToClassProviders, fromObjectsWithEffectsToEffects } from './helpers';
 import { registerEffects, Store } from 'juliette';
-import { fromObjectsWithEffectsToEffects } from './helpers';
 
-export function registerEffectsFactory<T>(store: Store<T>, ...objectsWithEffects: unknown[]): () => null {
-  const effects = fromObjectsWithEffectsToEffects(objectsWithEffects);
-  registerEffects(store, effects);
-  return () => null;
+@NgModule()
+export class EffectsRootModule {
+  constructor(store: Store<any>, @Inject(CLASSES_WITH_ROOT_EFFECTS) objectsWithEffects: any[]) {
+    const effects = fromObjectsWithEffectsToEffects(objectsWithEffects);
+    registerEffects(store, effects);
+  }
 }
 
 @NgModule()
 export class EffectsModule {
-  static forRoot(classesWithEffects: Type<unknown>[]): ModuleWithProviders<EffectsModule> {
+  static forRoot(classesWithEffects: Type<any>[]): ModuleWithProviders<EffectsRootModule> {
     return {
-      ngModule: EffectsModule,
-      providers: [
-        ...classesWithEffects,
-        {
-          provide: APP_INITIALIZER,
-          useFactory: registerEffectsFactory,
-          deps: [Store, ...classesWithEffects],
-          multi: true,
-        },
-      ],
+      ngModule: EffectsRootModule,
+      providers: [...fromClassesWithEffectsToClassProviders(CLASSES_WITH_ROOT_EFFECTS, classesWithEffects)],
     };
   }
 }
