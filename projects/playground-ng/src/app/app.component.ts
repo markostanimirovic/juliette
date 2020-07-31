@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { select, Store } from 'juliette';
+import { Store } from 'juliette';
+import { AppState } from './store/app-state';
+import { Observable } from 'rxjs';
 
 import * as fromUsers from './store/handlers/users.handlers';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pg-root',
@@ -10,9 +11,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  viewModel$: Observable<any> = this.store.state$.pipe(select(fromUsers.stateName));
+  viewModel$: Observable<fromUsers.State> = this.store.select(fromUsers.stateKey);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store<AppState>) {}
 
   fetchUsers(): void {
     this.store.dispatch(fromUsers.fetchUsers());

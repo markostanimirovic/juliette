@@ -3,7 +3,7 @@ import { User } from '../models/user.model';
 import { delay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-const users: User[] = [{ name: 'Marko' }, { name: 'Edis' }, { name: 'Kimi' }];
+const users: User[] = [{ name: 'John' }, { name: 'Peter' }, { name: 'Michael' }];
 
 @Injectable({
   providedIn: 'root',
