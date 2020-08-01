@@ -2,9 +2,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:juliette && ng build juliette-ng",
+    "build": "npm run build:juliette && ng build juliette-ng && npm run build:juliette-react",
     "build:juliette": "rm -rf dist/juliette && cd projects/juliette && tsc",
-    "build:prod": "npm run build:juliette && ng build juliette-ng --prod",
+    "build:juliette-react": "rm -rf dist/juliette-react && cd projects/juliette-react && tsc",
+    "build:prod": "npm run build:juliette && ng build juliette-ng --prod && npm run build:juliette-react",
     "test": "ng test",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
@@ -30,6 +31,7 @@
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
+    "react": "~16.13.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -40,6 +42,7 @@
     "@angular/cli": "~10.0.3",
     "@angular/compiler-cli": "~10.0.4",
     "@types/node": "^12.11.1",
+    "@types/react": "~16.9.44",
     "@typescript-eslint/eslint-plugin": "~3.7.0",
     "@typescript-eslint/parser": "~3.7.0",
     "eslint": "~7.5.0",

@@ -8,6 +8,9 @@
       "path": "./projects/juliette-ng/tsconfig.lib.json"
     },
     {
+      "path": "./projects/juliette-react/tsconfig.json"
+    },
+    {
       "path": "./projects/playground-ng/tsconfig.app.json"
     }
   ]

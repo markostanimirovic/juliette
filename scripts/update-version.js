@@ -1,7 +1,13 @@
 const { execSync } = require('child_process');
 const { writeFileSync } = require('fs');
 const readline = require('readline');
-const { juliettePath, julietteNgPackageJsonPath } = require('./paths');
+const {
+  julietteDirName,
+  julietteNgDirName,
+  julietteReactDirName,
+  getLibraryProjectPath,
+  getLibraryProjectPackageJsonPath,
+} = require('./paths');
 
 const getVersionType = () => {
   const versionTypeReadline = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -16,24 +22,30 @@ const getVersionType = () => {
   );
 };
 
-(async () => {
-  const versionType = await getVersionType();
-
-  console.log('Updating juliette version...');
-  const version = execSync(`cd ${juliettePath} && npm version ${versionType}`)
-    .toString()
-    .replace(/[^0-9.]/g, '');
-
-  const julietteNgPackageJson = require(julietteNgPackageJsonPath);
-  const updatedJulietteNgPackageJson = {
-    ...julietteNgPackageJson,
+const updatePluginLibraryVersion = (libraryName, version) => {
+  const libraryPackageJsonPath = getLibraryProjectPackageJsonPath(libraryName);
+  const libraryPackageJson = require(libraryPackageJsonPath);
+  const updatedLibraryPackageJson = {
+    ...libraryPackageJson,
     version,
     peerDependencies: {
-      ...julietteNgPackageJson.peerDependencies,
+      ...libraryPackageJson.peerDependencies,
       juliette: version,
     },
   };
 
-  console.log('Updating juliette-ng version...');
-  writeFileSync(julietteNgPackageJsonPath, JSON.stringify(updatedJulietteNgPackageJson, null, 2));
+  console.log(`Updating ${libraryName} version...`);
+  writeFileSync(libraryPackageJsonPath, JSON.stringify(updatedLibraryPackageJson, null, 2));
+};
+
+(async () => {
+  const versionType = await getVersionType();
+
+  console.log(`Updating ${julietteDirName} version...`);
+  const version = execSync(`cd ${getLibraryProjectPath(julietteDirName)} && npm version ${versionType}`)
+    .toString()
+    .replace(/[^0-9.]/g, '');
+
+  updatePluginLibraryVersion(julietteNgDirName, version);
+  updatePluginLibraryVersion(julietteReactDirName, version);
 })();

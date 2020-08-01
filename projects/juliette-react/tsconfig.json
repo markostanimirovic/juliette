@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/juliette",
+    "outDir": "../../dist/juliette-react",
     "declaration": true,
     "inlineSources": true,
     "importHelpers": false

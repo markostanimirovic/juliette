@@ -1,9 +1,10 @@
 {
-  "name": "juliette",
+  "name": "juliette-react",
   "version": "0.1.4",
   "main": "public-api.js",
   "types": "public-api.d.ts",
   "peerDependencies": {
-    "rxjs": "^6.5.5"
+    "juliette": "0.1.4",
+    "react": "^16.13.1"
   }
 }
