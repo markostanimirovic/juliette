@@ -18,7 +18,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "juliette": ["dist/juliette/public-api"],
-      "juliette-ng": ["dist/juliette-ng/juliette-ng", "dist/juliette-ng"]
+      "juliette-ng": ["dist/juliette-ng/juliette-ng", "dist/juliette-ng"],
+      "juliette-react": ["dist/juliette-react/public-api"]
     }
   },
   "angularCompilerOptions": {

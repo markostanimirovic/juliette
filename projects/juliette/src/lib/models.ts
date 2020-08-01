@@ -24,6 +24,8 @@ export type HandlerCreatorWithoutPayload<S> = () => HandlerWithoutPayload<S>;
 
 export type HandlerCreator<S, P> = HandlerCreatorWithPayload<S, P> | HandlerCreatorWithoutPayload<S>;
 
+export type Dispatch = (handler: Handler) => void;
+
 export type Selector<S, R> = (state: S) => R;
 
 export interface Effect {
