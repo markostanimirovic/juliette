@@ -33,9 +33,9 @@ export class Store<T> {
 
   select<R>(selector: Selector<T, R>): Observable<R>;
 
-  select<K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): Observable<R | T[K]> {
-    const mapFn = typeof keyOrSelector === 'function' ? keyOrSelector : (state: T): T[K] => state[keyOrSelector];
-    return this.state$.pipe(map<T, R | T[K]>(mapFn));
+  select<K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): Observable<T[K] | R> {
+    const mapFn = typeof keyOrSelector === 'function' ? keyOrSelector : (state: T) => state[keyOrSelector];
+    return this.state$.pipe(map<T, T[K] | R>(mapFn));
   }
 }
 
