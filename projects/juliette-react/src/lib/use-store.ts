@@ -1,21 +1,20 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from './store-context';
-import { Dispatch, Selector } from 'juliette';
+import { Store, Dispatch, Selector } from 'juliette';
 import { distinctUntilChanged, skip, take } from 'rxjs/operators';
 
-export function useStore<T, K extends keyof T>(key: K): [T[K], Dispatch];
+export function useStore<T, R>(selector: Selector<T, R>): [R, Dispatch] {
+  const store: Store<T> = useContext(StoreContext);
 
-export function useStore<T, R>(selector: Selector<T, R>): [R, Dispatch];
+  if (!store) throw new Error('Store is not provided! Provide it using StoreContext.');
 
-export function useStore<T, K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): [T[K] | R, Dispatch] {
-  const store = useContext(StoreContext);
   const [state$, initialState] = useMemo(() => {
     let initialState: any = null;
-    const state$ = store.select(keyOrSelector).pipe(distinctUntilChanged());
+    const state$ = store.select(selector).pipe(distinctUntilChanged());
     state$.pipe(take(1)).subscribe(state => (initialState = state));
 
     return [state$, initialState];
-  }, [store, keyOrSelector]);
+  }, [store, selector]);
   const [state, setState] = useState(initialState);
 
   useEffect(() => {

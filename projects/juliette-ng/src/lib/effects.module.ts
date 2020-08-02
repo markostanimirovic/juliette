@@ -1,6 +1,6 @@
 import { Inject, ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CLASSES_WITH_ROOT_EFFECTS } from './tokens';
-import { fromClassesWithEffectsToClassProviders, fromObjectsWithEffectsToEffects } from './helpers';
+import { fromClassesWithEffectsToClassProviders, fromObjectsWithEffectsToEffects } from './effects-mapper';
 import { registerEffects, Store } from 'juliette';
 
 @NgModule()
