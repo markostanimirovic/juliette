@@ -11,13 +11,13 @@ const {
   getLibraryDistPackageJsonPath,
 } = require('./paths');
 
-const copyReadmeToLibraryDistDir = libraryName => {
+const copyReadmeToLibraryDist = libraryName => {
   console.log(`Copying README.md to ${libraryName}...`);
   execSync(`cp -r ${readmePath} ${getLibraryDistPath(libraryName)}`);
 };
 
-const copyPackageJsonToLibraryDistPath = libraryName => {
-  console.log(`Copying package.json to ${libraryName} dist...`);
+const copyPackageJsonToLibraryDist = libraryName => {
+  console.log(`Copying package.json to ${libraryName}...`);
   execSync(`cp -r ${getLibraryProjectPackageJsonPath(libraryName)} ${getLibraryDistPath(libraryName)}`);
 };
 
@@ -38,12 +38,12 @@ const publishLibrary = libraryName => {
 const isCommitted = execSync('git diff').toString().length === 0;
 if (!isCommitted) throw new Error('Please commit or stash changes before publish!');
 
-copyReadmeToLibraryDistDir(julietteDirName);
-copyReadmeToLibraryDistDir(julietteNgDirName);
-copyReadmeToLibraryDistDir(julietteReactDirName);
+copyReadmeToLibraryDist(julietteDirName);
+copyReadmeToLibraryDist(julietteNgDirName);
+copyReadmeToLibraryDist(julietteReactDirName);
 
-copyPackageJsonToLibraryDistPath(julietteDirName);
-copyPackageJsonToLibraryDistPath(julietteReactDirName);
+copyPackageJsonToLibraryDist(julietteDirName);
+copyPackageJsonToLibraryDist(julietteReactDirName);
 
 copyProjectInfoToPackageJson(julietteDirName);
 copyProjectInfoToPackageJson(julietteNgDirName);

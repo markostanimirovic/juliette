@@ -41,10 +41,7 @@ export class FetchUsersError implements Action {
   readonly type = FETCH_USERS_ERROR;
 }
 
-export type Action =
-  | FetchUsers
-  | FetchUsersSuccess
-  | FetchUsersError;
+export type Action = FetchUsers | FetchUsersSuccess | FetchUsersError;
 
 // users.reducer.ts
 
@@ -60,10 +57,7 @@ const initialState: State = {
   showLoading: false,
 };
 
-export function reducer(
-  state = initialState,
-  action: UsersActions.Action,
-): State {
+export function reducer(state = initialState, action: UsersActions.Action): State {
   switch (action.type) {
     case UsersActions.FETCH_USERS:
       return { ...state, showLoading: true };
@@ -76,6 +70,7 @@ export function reducer(
   }
 }
 ```
+
 </details>
 
 TypeScript code above shows the old NgRx syntax and it is pretty similar to traditional Redux syntax.
@@ -90,40 +85,41 @@ to define actions and reducers.
 
 export const fetchUsers = createAction('[Users] Fetch Users');
 export const fetchUsersSuccess = createAction(
-  '[Users] Fetch Users Success',
-  props<{ users: User[] }>()
+'[Users] Fetch Users Success',
+props<{ users: User[] }>()
 );
 export const fetchUsersError = createAction('[Users] Fetch Users Error');
 
 // users.reducer.ts
 
-import * as UsersActions from './users.actions';
+import \* as UsersActions from './users.actions';
 
 export interface State {
-  users: User[];
-  showLoading: boolean;
+users: User[];
+showLoading: boolean;
 }
 
 const initialState: State = {
-  users: [],
-  showLoading: false,
+users: [],
+showLoading: false,
 };
 
 export const reducer = createReducer(
-  initialState,
-  on(UsersActions.fetchUsers, state => ({ ...state, showLoading: true })),
-  on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
-    ...state,
-    users,
-    showLoading: false,
-  })),
-  on(UsersActions.fetchUsersError, state => ({
-    ...state,
-    users: [],
-    showLoading: false,
-  })),
+initialState,
+on(UsersActions.fetchUsers, state => ({ ...state, showLoading: true })),
+on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
+...state,
+users,
+showLoading: false,
+})),
+on(UsersActions.fetchUsersError, state => ({
+...state,
+users: [],
+showLoading: false,
+})),
 );
-```
+
+````
 </details>
 
 better/similar to new redux, but branching is still present
@@ -161,7 +157,8 @@ export const fetchUsersError = createHandler<State>(
   stateKey,
   state => ({ ...state, users: [], showLoading: false }),
 );
-```
+````
+
 </details>
 
 ### Simplified Configuration
