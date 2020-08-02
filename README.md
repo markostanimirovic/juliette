@@ -1,6 +1,6 @@
 [![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/stanimirovic/juliette)
 
-# Juliette &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![NPM Version](https://badge.fury.io/js/juliette.svg)](https://badge.fury.io/js/juliette)
+# Juliette &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![NPM Version](https://badge.fury.io/js/juliette.svg)](https://badge.fury.io/js/juliette) [![Downloads](https://img.shields.io/npm/dt/juliette.svg)](https://github.com/stanimirovic/juliette)
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
