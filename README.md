@@ -4,21 +4,37 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
+## Table of Contents
+
+- [Description](#description)
+  - [Reduced Boilerplate Without Reducer's Ifology](#reduced-boilerplate-without-reducers-ifology)
+  - [Simplified Configuration](#simplified-configuration)
+  - [Framework Agnostic](#framework-agnostic)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Handlers](#handlers)
+  - [Store](#store)
+  - [Effects](#effects)
+  - [Angular Integration](#angular-integration)
+  - [React Integration](#react-integration)
+- [Quick Start with Angular](#quick-start-with-angular)
+- [Quick Start with React](#quick-start-with-react)
+- [License](#license)
+
 ## Description
 
-Juliette is a reactive state management container inspired by [NgRx](https://ngrx.io/).
-It reduces Redux boilerplate, eliminates reducer's ifology, simplifies the configuration
-and introduces NgRx architecture into the framework independent world.
-Juliette is a TypeScript friendly library and can be used in Angular,
-React or any JavaScript application.
+Juliette is a reactive state management library inspired by [NgRx](https://ngrx.io/).
+It reduces Redux boilerplate, eliminates reducer's conditional branching, simplifies
+the configuration and introduces NgRx architecture into the framework-agnostic world.
+Juliette is a TypeScript friendly library and can be used in Angular, React or any JavaScript application.
 
 ### Reduced Boilerplate Without Reducer's Ifology
 
-Juliette reduces Redux boilerplate by merging Action and Reducer components into one component called Handler.
-To better understand the benefits of Handler, let's first look at how actions and reducers are defined by using NgRx.
+Juliette reduces Redux boilerplate by merging action and reducer into one component called handler.
+To better understand the benefits of handler, let's first look at how actions and reducers are defined by using NgRx.
 
 <details>
-  <summary><b>Old NgRx Syntax</b></summary>
+  <summary><b>Old NgRx Approach</b></summary>
 
 ```typescript
 // users.actions.ts
@@ -70,15 +86,14 @@ export function reducer(state = initialState, action: UsersActions.Action): Stat
   }
 }
 ```
-
 </details>
 
-TypeScript code above shows the old NgRx syntax and it is pretty similar to traditional Redux syntax.
+TypeScript code above shows the old NgRx syntax and it is pretty similar to traditional Redux approach.
 As you can see, it's too much code for three simple actions. Then, NgRx team introduced a new way
 to define actions and reducers.
 
 <details>
-  <summary><b>New NgRx Syntax</b></summary>
+  <summary><b>New NgRx Approach</b></summary>
   
 ```typescript
 // users.actions.ts
@@ -118,14 +133,15 @@ users: [],
 showLoading: false,
 })),
 );
-
 ````
 </details>
 
-better/similar to new redux, but branching is still present
+As you can see, less code is needed to define the same logic. Conditional branching for actions
+in the reducer is masked by the `on` operator, but it is still present. Let's now look at how
+the same example is implemented using Juliette handlers.
 
 <details>
-  <summary><b>Juliette Syntax</b></summary>
+  <summary><b>Juliette Approach</b></summary>
 
 ```typescript
 // users.handlers.ts
@@ -158,14 +174,13 @@ export const fetchUsersError = createHandler<State>(
   state => ({ ...state, users: [], showLoading: false }),
 );
 ````
-
 </details>
 
 ### Simplified Configuration
 
 You don't need to register reducers to the store anymore!
 
-### Framework Independent
+### Framework Agnostic
 
 Core features of Juliette are implemented in pure TypeScript without framework dependencies.
 Framework specific stuff is located in separated libraries.
@@ -180,11 +195,19 @@ If you are using React, install additional package by running `npm install --sav
 
 ## Usage
 
-### createHandler
+### Handlers
 
-### createStore
+### Store
 
-...
+### Effects
+
+### Angular Integration
+
+### React Integration
+
+## Quick Start with Angular
+
+## Quick Start with React
 
 ## License
 
