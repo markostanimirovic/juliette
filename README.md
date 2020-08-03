@@ -10,6 +10,7 @@
   - [Reduced Boilerplate Without Reducer's Ifology](#reduced-boilerplate-without-reducers-ifology)
   - [Simplified Configuration](#simplified-configuration)
   - [Framework Agnostic](#framework-agnostic)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Handlers](#handlers)
@@ -184,6 +185,10 @@ You don't need to register reducers to the store anymore!
 
 Core features of Juliette are implemented in pure TypeScript without framework dependencies.
 Framework specific stuff is located in separated libraries.
+
+## Architecture
+
+![Juliette Architecture](https://i.ibb.co/yYS27T4/juliette-architecture.png)
 
 ## Installation
 
