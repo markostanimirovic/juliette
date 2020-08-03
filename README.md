@@ -100,38 +100,38 @@ to define actions and reducers.
 
 export const fetchUsers = createAction('[Users] Fetch Users');
 export const fetchUsersSuccess = createAction(
-'[Users] Fetch Users Success',
-props<{ users: User[] }>()
+  '[Users] Fetch Users Success',
+  props<{ users: User[] }>()
 );
 export const fetchUsersError = createAction('[Users] Fetch Users Error');
 
 // users.reducer.ts
 
-import \* as UsersActions from './users.actions';
+import * as UsersActions from './users.actions';
 
 export interface State {
-users: User[];
-showLoading: boolean;
+  users: User[];
+  showLoading: boolean;
 }
 
 const initialState: State = {
-users: [],
-showLoading: false,
+  users: [],
+  showLoading: false,
 };
 
 export const reducer = createReducer(
-initialState,
-on(UsersActions.fetchUsers, state => ({ ...state, showLoading: true })),
-on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
-...state,
-users,
-showLoading: false,
-})),
-on(UsersActions.fetchUsersError, state => ({
-...state,
-users: [],
-showLoading: false,
-})),
+  initialState,
+  on(UsersActions.fetchUsers, state => ({ ...state, showLoading: true })),
+  on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
+    ...state,
+    users,
+    showLoading: false,
+  })),
+  on(UsersActions.fetchUsersError, state => ({
+    ...state,
+    users: [],
+    showLoading: false,
+  })),
 );
 ````
 </details>
