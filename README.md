@@ -20,6 +20,7 @@
   - [React Integration](#react-integration)
 - [Quick Start with Angular](#quick-start-with-angular)
 - [Quick Start with React](#quick-start-with-react)
+- [Support](#support)
 - [License](#license)
 
 ## Description
@@ -102,7 +103,7 @@ to define actions and reducers.
 export const fetchUsers = createAction('[Users] Fetch Users');
 export const fetchUsersSuccess = createAction(
   '[Users] Fetch Users Success',
-  props<{ users: User[] }>()
+  props<{ users: User[] }>(),
 );
 export const fetchUsersError = createAction('[Users] Fetch Users Error');
 
@@ -162,7 +163,7 @@ export const initialState: State = {
 export const fetchUsers = createHandler<State>(
   '[Users] Fetch Users',
   stateKey,
-  state => ({ ...state, showLoading: true })
+  state => ({ ...state, showLoading: true }),
 );
 export const fetchUsersSuccess = createHandler<State, { users: User[] }>(
   '[Users] Fetch Users Success',
@@ -213,6 +214,10 @@ If you are using React, install additional package by running `npm install --sav
 ## Quick Start with Angular
 
 ## Quick Start with React
+
+## Support
+
+Give a ⭐ if you like Juliette!
 
 ## License
 
