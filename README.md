@@ -138,9 +138,9 @@ export const reducer = createReducer(
 ````
 </details>
 
-As you can see, less code is needed to define the same logic. Conditional branching for actions
-in the reducer is masked by the `on` operator, but it is still present. Let's now look at how
-the same example is implemented using Juliette handlers.
+With new NgRx syntax, less amount of code is needed to define actions and reducer. Conditional
+branching for actions in the reducer is masked by the `on` operator, but it is still present.
+Let's now look at how the same example is implemented using Juliette handlers.
 
 <details>
   <summary><b>Juliette Approach</b></summary>
@@ -178,16 +178,25 @@ export const fetchUsersError = createHandler<State>(
 ````
 </details>
 
+As you can see, Juliette way is more declarative. Also, the least amount of code is required to define the same logic.
+Instead of creating actions and then adding new conditional branches to the reducer, Juliette's handler creator accepts
+the reducer function on-site.
+
 ### Simplified Configuration
 
 You don't need to register reducers to the store anymore!
 
 ### Framework Agnostic
 
-Core features of Juliette are implemented in pure TypeScript without framework dependencies.
-Framework specific stuff is located in separated libraries.
+Core features of Juliette are implemented in pure TypeScript. The library is small in size and has RxJS as the only production dependency.
+All framework specific stuff is in separate libraries. There are two plugin libraries available, for Angular and for React They provide core
+functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
+be native.
 
 ## Architecture
+
+Juliette does not have a much less complex execution flow than NgRx, it just do one part in different way. Merging action and reducer in one
+component will reduce the boilerplate but it will not make a mess in complex systems. Let's look at the diagram.
 
 ![Juliette Architecture](https://i.ibb.co/yYS27T4/juliette-architecture.png)
 
@@ -217,7 +226,7 @@ If you are using React, install additional package by running `npm install --sav
 
 ## Support
 
-Give a ⭐ if you like Juliette!
+Give a ⭐ if you like Juliette 😎
 
 ## License
 
