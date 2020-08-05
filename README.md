@@ -16,8 +16,8 @@
   - [Handlers](#handlers)
   - [Store](#store)
   - [Effects](#effects)
-  - [Angular Integration](#angular-integration)
-  - [React Integration](#react-integration)
+  - [Angular Plugin](#angular-plugin)
+  - [React Plugin](#react-plugin)
 - [Quick Start with Angular](#quick-start-with-angular)
 - [Quick Start with React](#quick-start-with-react)
 - [Support](#support)
@@ -215,15 +215,17 @@ If you are using React, install additional package by running `npm install --sav
 
 ## Usage
 
+UNDER CONSTRUCTION
+
 ### Handlers
 
 ### Store
 
 ### Effects
 
-### Angular Integration
+### Angular Plugin
 
-### React Integration
+### React Plugin
 
 ## Quick Start with Angular
 
