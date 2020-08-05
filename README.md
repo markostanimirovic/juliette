@@ -178,7 +178,7 @@ export const fetchUsersError = createHandler<State>(
 ````
 </details>
 
-As you can see, Juliette way is more declarative. Also, the least amount of code is required to define the same logic.
+As you can see, Juliette way is declarative. Also, the least amount of code is required to define the same logic.
 Instead of creating actions and then adding new conditional branches to the reducer, Juliette's handler creator accepts
 the reducer function on-site.
 
@@ -188,7 +188,7 @@ You don't need to register reducers to the store anymore!
 
 ### Framework Agnostic
 
-Core features of Juliette are implemented in pure TypeScript. The library is small in size and has RxJS as the only production dependency.
+Core features of Juliette are implemented in pure TypeScript. The library is small sized and has RxJS as the only production dependency.
 All framework specific stuff is in separate libraries. There are two plugin libraries available, for Angular and for React They provide core
 functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
 be native.
@@ -196,7 +196,7 @@ be native.
 ## Architecture
 
 Juliette doesn't have a much less complex execution flow than NgRx, but one part of the architecture is different.
-Merging action and reducer into handler will reduce the boilerplate and will not make a mess in complex systems.
+Merging action and reducer into the handler will reduce the boilerplate and will not make a mess in complex systems.
 Let's look at the diagram.
 
 ![Juliette Architecture](https://i.ibb.co/nBK3Wk3/juliette-architecture.png)
