@@ -18,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && npm run build:prod && git add -A"
+      "pre-commit": "npm run lint:fix && npm run build:prod"
     }
   },
   "private": true,

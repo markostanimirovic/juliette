@@ -1,8 +1,10 @@
 [![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/stanimirovic/juliette)
 
-# Juliette &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![NPM Version](https://badge.fury.io/js/juliette.svg)](https://badge.fury.io/js/juliette) [![Downloads](https://img.shields.io/npm/dt/juliette.svg)](https://github.com/stanimirovic/juliette)
+# Juliette
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette?label=juliette%20npm)](https://www.npmjs.com/package/juliette) [![Juliette Ng NPM](https://img.shields.io/npm/v/juliette-ng?label=juliette-ng%20npm)](https://www.npmjs.com/package/juliette-ng) [![Juliette React NPM](https://img.shields.io/npm/v/juliette-react?label=juliette-react%20npm)](https://www.npmjs.com/package/juliette-react) [![Juliette Downloads](https://img.shields.io/npm/dt/juliette.svg?label=juliette%20downloads)](https://npmcharts.com/compare/juliette?interval=30) [![Juliette Ng Downloads](https://img.shields.io/npm/dt/juliette-ng.svg?label=juliette-ng%20downloads)](https://npmcharts.com/compare/juliette-ng?interval=30) [![Juliette React Downloads](https://img.shields.io/npm/dt/juliette-react.svg?label=juliette-react%20downloads)](https://npmcharts.com/compare/juliette-react?interval=30)
 
 ## Table of Contents
 
@@ -189,7 +191,7 @@ You don't need to register reducers to the store anymore!
 ### Framework Agnostic
 
 Core features of Juliette are implemented in pure TypeScript. The library is small sized and has RxJS as the only production dependency.
-All framework specific stuff is in separate libraries. There are two plugin libraries available, for Angular and for React They provide core
+All framework specific stuff is in separate libraries. There are two plugin libraries available, for Angular and for React. They provide core
 functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
 be native.
 
