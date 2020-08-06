@@ -14,14 +14,15 @@
   - [Framework Agnostic](#framework-agnostic)
 - [Architecture](#architecture)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Guide](#guide)
   - [Handlers](#handlers)
   - [Store](#store)
   - [Effects](#effects)
   - [Angular Plugin](#angular-plugin)
   - [React Plugin](#react-plugin)
-- [Quick Start with Angular](#quick-start-with-angular)
-- [Quick Start with React](#quick-start-with-react)
+- [Examples](#examples)
+  - [Angular Example](#angular-example)
+  - [React Example](#react-example)
 - [Support](#support)
 - [License](#license)
 
@@ -215,23 +216,99 @@ If you are using Angular, install additional package by running `npm install --s
 
 If you are using React, install additional package by running `npm install --save juliette-react` command.
 
-## Usage
-
-UNDER CONSTRUCTION
+## Guide
 
 ### Handlers
 
+As already mentioned, handler is the component that merges the action and the reducer. You can create Juliette's handler by using `createHandler` function.
+This function has two required arguments `type` and `stateKey`. `type` is similar to action type in Redux and it needs to be unique on application
+level. `stateKey` is a property name in application state of state chunk that defined handler refers to. Let's see `createHandler` in action.
+
+```typescript
+const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog', 'todos'); 
+````
+
+Third argument of `createHandler` is a reducer function and it's optional. You can pass it when state needs to be updated on handler dispatch.
+
+```typescript
+const fetchTodos = createHandler('[Todos] Fetch Todos', 'todos', state => ({ ...state, showLoading: true }));
+````
+
+If you try compile the code above, you'll get compilation error. That's because `createHandler` function is strongly typed in order to avoid mistakes. You
+need to pass type of todos state chunk as generic argument.
+
+```typescript
+const fetchTodos = createHandler<TodosState>('[Todos] Fetch Todos', 'todos', state => ({ ...state, showLoading: true }));
+````
+
+`createHandler` function has two signatures. First is when defined handler doesn't have payload, and second is when it has. Payload type needs to be
+passed as second generic argument in order to prevent passing wrong payload to the defined handler on dispatch.
+Reducer function is optional argument in second signature too.
+
+```typescript
+const createTodo = createHandler<TodosState, { todo: Todo }>('[Todos] Create Todo', 'todos');
+
+const updateTodosCurrentPage = createHandler<TodosState, { currentPage: number }>(
+  '[Todos] Update Todos Current Page',
+  'todos',
+  (state, { currentPage }) => ({ ...state, currentPage }),
+);
+```` 
+
 ### Store
 
+To create the store, Juliette provides `createStore` function. It accepts initial application state as an argument. Second argument is `debugMode`
+and it's optional. You can enable `debugMode` when application is in development mode in order to log the state and handlers on every dispatch.
+
+```typescript
+const store = createStore(initialAppState, isDevMode);
+````
+
+To dispatch handlers, store provides `dispatch` function.
+
+```typescript
+store.dispatch(TodosHandlers.fetchTodos());
+````
+
+There are two ways to get the application state. In both cases, you'll get the state as an observable.
+First is to get the whole state by using `state$` property from the store.
+
+```typescript
+const appState$ = store.state$;
+````
+
+Second option is to select partial state that you need for current view. For that purpose, Juliette's store provides `select` function.
+You can pass the name of state chunk that you need or selector function that accepts state as an argument and returns selected stuff.
+
+```typescript
+const todosState1$ = store.select('todos');
+const todosState2$ = store.select(state => state.todos);
+````
+
+Another way to select state from the store is to use regular RxJS operators.
+
+```typescript
+const todosState3$ = store.state$.pipe(pluck('todos'));
+const todosState4$ = store.state$.pipe(map(state => state.todos));
+````
+
 ### Effects
+
+EFFECTS_DESCRIPTION
+
+EFFECTS_EXAMPLE: create todo handler, chaining handlers (updateCurrentPage -> fetch)
 
 ### Angular Plugin
 
 ### React Plugin
 
-## Quick Start with Angular
+## Examples
 
-## Quick Start with React
+Check [juliette-examples](https://github.com/stanimirovic/juliette-examples) repository to see complete example projects.
+
+### Angular Example
+
+### React Example
 
 ## Support
 
