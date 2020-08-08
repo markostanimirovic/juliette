@@ -8,10 +8,13 @@ export function useStore<T, R>(selector: Selector<T, R>): [R, Dispatch] {
   if (!store) throw new Error('Store is not provided! Use StoreContext to provide it.');
 
   const [state, setState] = useState(selector(store.state));
-  const state$ = useMemo(() => store.select(selector).pipe(distinctUntilChanged()), [store]);
+  const state$ = useMemo(() => store.select(selector).pipe(distinctUntilChanged(), skip(1)), [
+    selector,
+    store,
+  ]);
 
   useEffect(() => {
-    const subscription = state$.pipe(skip(1)).subscribe(setState);
+    const subscription = state$.subscribe(setState);
     return () => subscription.unsubscribe();
   }, [state$]);
 
