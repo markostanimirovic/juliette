@@ -5,7 +5,11 @@ export const fromClassesWithEffectsToClassProviders = (
   injectionToken: InjectionToken<any>,
   classesWithEffects: Type<any>[],
 ): ClassProvider[] =>
-  classesWithEffects.map(classWithEffects => ({ provide: injectionToken, useClass: classWithEffects, multi: true }));
+  classesWithEffects.map(classWithEffects => ({
+    provide: injectionToken,
+    useClass: classWithEffects,
+    multi: true,
+  }));
 
 export const fromObjectsWithEffectsToEffects = (objectsWithEffects: any[]): Effect[] =>
   objectsWithEffects.reduce((acc, objectWithEffects) => {

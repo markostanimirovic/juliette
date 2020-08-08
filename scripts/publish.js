@@ -18,7 +18,9 @@ const copyReadmeToLibraryDist = libraryName => {
 
 const copyPackageJsonToLibraryDist = libraryName => {
   console.log(`Copying package.json to ${libraryName}...`);
-  execSync(`cp -r ${getLibraryProjectPackageJsonPath(libraryName)} ${getLibraryDistPath(libraryName)}`);
+  execSync(
+    `cp -r ${getLibraryProjectPackageJsonPath(libraryName)} ${getLibraryDistPath(libraryName)}`,
+  );
 };
 
 const copyProjectInfoToPackageJson = libraryName => {
@@ -27,7 +29,10 @@ const copyProjectInfoToPackageJson = libraryName => {
   const libraryDistPackageJson = require(libraryDistPackageJsonPath);
 
   console.log(`Copying project.info to ${libraryName} package.json...`);
-  writeFileSync(libraryDistPackageJsonPath, JSON.stringify({ ...libraryDistPackageJson, ...projectInfo }, null, 2));
+  writeFileSync(
+    libraryDistPackageJsonPath,
+    JSON.stringify({ ...libraryDistPackageJson, ...projectInfo }, null, 2),
+  );
 };
 
 const publishLibrary = libraryName => {

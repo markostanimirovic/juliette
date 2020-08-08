@@ -1,26 +1,25 @@
-import {
-  HandlerCreatorWithoutPayload,
-  HandlerCreatorWithPayload,
-  ReducerWithoutPayload,
-  ReducerWithPayload,
-} from './models';
+import { HandlerCreator, Reducer } from './models';
 
-export function createHandler<S>(
+export function createHandler(type: string): HandlerCreator;
+
+export function createHandler<P>(type: string): HandlerCreator<null, NonNullable<P>>;
+
+export function createHandler<S = null>(
   type: string,
   stateKey: string,
-  reducer?: ReducerWithoutPayload<S>,
-): HandlerCreatorWithoutPayload<S>;
+  reducer: Reducer<NonNullable<S>>,
+): HandlerCreator<NonNullable<S>>;
 
-export function createHandler<S, P>(
+export function createHandler<S = null, P = null>(
   type: string,
   stateKey: string,
-  reducer?: ReducerWithPayload<S, P>,
-): HandlerCreatorWithPayload<S, P>;
+  reducer: Reducer<NonNullable<S>, NonNullable<P>>,
+): HandlerCreator<NonNullable<S>, NonNullable<P>>;
 
-export function createHandler<S, P>(
+export function createHandler(
   type: string,
-  stateKey: string,
-  reducer?: ReducerWithPayload<S, P> | ReducerWithoutPayload<S>,
-): HandlerCreatorWithPayload<S, P> | HandlerCreatorWithoutPayload<S> {
-  return (payload: P) => ({ type, stateKey, reducer, payload });
+  stateKey?: string,
+  reducer?: Reducer<any, any>,
+): HandlerCreator<any, any> {
+  return (payload?: any) => ({ type, stateKey, reducer, payload });
 }

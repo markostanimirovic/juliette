@@ -15,4 +15,5 @@ exports.getLibraryProjectPath = libraryName => join(exports.projectsPath, librar
 exports.getLibraryProjectPackageJsonPath = libraryName =>
   join(exports.getLibraryProjectPath(libraryName), 'package.json');
 exports.getLibraryDistPath = libraryName => join(exports.distPath, libraryName);
-exports.getLibraryDistPackageJsonPath = libraryName => join(exports.getLibraryDistPath(libraryName), 'package.json');
+exports.getLibraryDistPackageJsonPath = libraryName =>
+  join(exports.getLibraryDistPath(libraryName), 'package.json');

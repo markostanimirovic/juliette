@@ -70,7 +70,10 @@
             "polyfills": "projects/playground-ng/src/polyfills.ts",
             "tsConfig": "projects/playground-ng/tsconfig.app.json",
             "aot": true,
-            "assets": ["projects/playground-ng/src/favicon.ico", "projects/playground-ng/src/assets"],
+            "assets": [
+              "projects/playground-ng/src/favicon.ico",
+              "projects/playground-ng/src/assets"
+            ],
             "styles": ["projects/playground-ng/src/styles.scss"],
             "scripts": []
           },

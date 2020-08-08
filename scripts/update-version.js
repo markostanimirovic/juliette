@@ -10,15 +10,21 @@ const {
 } = require('./paths');
 
 const getVersionType = () => {
-  const versionTypeReadline = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const versionTypeReadline = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
   const allVersionTypes = ['patch', 'minor', 'major'];
   const defaultVersionType = allVersionTypes[0];
 
   return new Promise(resolve =>
-    versionTypeReadline.question(`Enter version type (${allVersionTypes.join('/')}): `, versionType => {
-      versionTypeReadline.close();
-      resolve(allVersionTypes.indexOf(versionType) > -1 ? versionType : defaultVersionType);
-    }),
+    versionTypeReadline.question(
+      `Enter version type (${allVersionTypes.join('/')}): `,
+      versionType => {
+        versionTypeReadline.close();
+        resolve(allVersionTypes.indexOf(versionType) > -1 ? versionType : defaultVersionType);
+      },
+    ),
   );
 };
 
@@ -42,7 +48,9 @@ const updatePluginLibraryVersion = (libraryName, version) => {
   const versionType = await getVersionType();
 
   console.log(`Updating ${julietteDirName} version...`);
-  const version = execSync(`cd ${getLibraryProjectPath(julietteDirName)} && npm version ${versionType}`)
+  const version = execSync(
+    `cd ${getLibraryProjectPath(julietteDirName)} && npm version ${versionType}`,
+  )
     .toString()
     .replace(/[^0-9.]/g, '');
 

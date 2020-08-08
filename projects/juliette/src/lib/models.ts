@@ -1,34 +1,37 @@
 import { Observable } from 'rxjs';
 
-export type ReducerWithPayload<S, P> = (state: S, payload: P) => S;
+export type NullOrUndefined = null | undefined;
 
-export type ReducerWithoutPayload<S> = (state: S) => S;
+export type Reducer<
+  S = null,
+  P = null,
+  R = S extends NullOrUndefined
+    ? null
+    : P extends NullOrUndefined
+    ? (state: S) => S
+    : (state: S, payload: P) => S
+> = R;
 
-export interface Handler {
+export interface Handler<S = null, P = null> {
   type: string;
-  stateKey: string;
+  stateKey?: string;
+  reducer?: Reducer<S, P>;
+  payload?: P;
 }
 
-export interface HandlerWithPayload<S, P> extends Handler {
-  reducer?: ReducerWithPayload<S, P>;
-  payload: P;
-}
+export type HandlerCreator<
+  S = null,
+  P = null,
+  HC = P extends NullOrUndefined ? () => Handler<S, P> : (payload: P) => Handler<S, P>
+> = HC;
 
-export interface HandlerWithoutPayload<S> extends Handler {
-  reducer?: ReducerWithoutPayload<S>;
-}
-
-export type HandlerCreatorWithPayload<S, P> = (payload: P) => HandlerWithPayload<S, P>;
-
-export type HandlerCreatorWithoutPayload<S> = () => HandlerWithoutPayload<S>;
-
-export type HandlerCreator<S, P> = HandlerCreatorWithPayload<S, P> | HandlerCreatorWithoutPayload<S>;
-
-export type Dispatch = (handler: Handler) => void;
+export type Dispatch = (handler: Handler<any, any>) => void;
 
 export type Selector<S, R> = (state: S) => R;
 
+export type EffectSource = Handler<any, any> | void;
+
 export interface Effect {
-  source$: Observable<Handler | void>;
+  source$: Observable<EffectSource>;
   type: string;
 }

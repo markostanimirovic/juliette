@@ -11,7 +11,9 @@ export class UsersEffects {
   fetchUsers$ = createEffect(
     this.store.handlers$.pipe(
       ofType(fromUsers.fetchUsers),
-      switchMap(() => this.usersResource.getUsers().pipe(map(users => fromUsers.fetchUsersSuccess({ users })))),
+      switchMap(() =>
+        this.usersResource.getUsers().pipe(map(users => fromUsers.fetchUsersSuccess({ users }))),
+      ),
     ),
   );
 

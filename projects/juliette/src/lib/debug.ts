@@ -21,6 +21,6 @@ const logState = <T>(state: T): void => {
   console.groupEnd();
 };
 
-const logHandler = (handler: Handler): void => {
+const logHandler = (handler: Handler<any, any>): void => {
   console.log(`%c🚀 Handler: ${handler.type}`, loggingStyle);
 };
