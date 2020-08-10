@@ -17,12 +17,12 @@ export class Store<T> {
   }
 
   dispatch(handler: Handler<any, any>): void {
-    if (handler.reducer && handler.stateKey) {
-      const currentState = this.state.value[handler.stateKey as keyof T];
+    if (handler.reducer && handler.featureKey) {
+      const currentState = this.state.value[handler.featureKey as keyof T];
 
       this.state.next({
         ...this.state.value,
-        [handler.stateKey]: handler.reducer(currentState, handler.payload),
+        [handler.featureKey]: handler.reducer(currentState, handler.payload),
       });
     }
 

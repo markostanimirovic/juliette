@@ -14,7 +14,7 @@ export type Reducer<
 
 export interface Handler<S = null, P = null> {
   type: string;
-  stateKey?: string;
+  featureKey?: string;
   reducer?: Reducer<S, P>;
   payload?: P;
 }

@@ -11,7 +11,7 @@ import * as fromUsers from './store/handlers/users.handlers';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  viewModel$: Observable<fromUsers.State> = this.store.select(fromUsers.stateKey);
+  viewModel$: Observable<fromUsers.State> = this.store.select(fromUsers.featureKey);
 
   constructor(private store: Store<AppState>) {}
 

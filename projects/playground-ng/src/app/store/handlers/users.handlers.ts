@@ -1,7 +1,7 @@
 import { User } from '../../core/models/user.model';
 import { createHandler } from 'juliette';
 
-export const stateKey = 'users';
+export const featureKey = 'users';
 
 export interface State {
   users: User[];
@@ -13,13 +13,13 @@ export const initialState: State = {
   showLoading: false,
 };
 
-export const fetchUsers = createHandler<State>('[Users] Fetch Users', stateKey, state => ({
+export const fetchUsers = createHandler<State>('[Users] Fetch Users', featureKey, state => ({
   ...state,
   showLoading: true,
 }));
 
 export const fetchUsersSuccess = createHandler<State, { users: User[] }>(
   '[Users] Fetch Users Success',
-  stateKey,
+  featureKey,
   (state, { users }) => ({ ...state, users, showLoading: false }),
 );

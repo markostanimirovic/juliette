@@ -1,9 +1,9 @@
 import * as fromUsers from './handlers/users.handlers';
 
 export interface AppState {
-  [fromUsers.stateKey]: fromUsers.State;
+  [fromUsers.featureKey]: fromUsers.State;
 }
 
 export const initialAppState: AppState = {
-  [fromUsers.stateKey]: fromUsers.initialState,
+  [fromUsers.featureKey]: fromUsers.initialState,
 };

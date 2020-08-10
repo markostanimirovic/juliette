@@ -149,7 +149,7 @@ Let's now look at how the same example is implemented using Juliette handlers.
 ```typescript
 // users.handlers.ts
 
-export const stateKey = 'users';
+export const featureKey = 'users';
 
 export interface State {
   users: User[];
@@ -163,17 +163,17 @@ export const initialState: State = {
 
 export const fetchUsers = createHandler<State>(
   '[Users] Fetch Users',
-  stateKey,
+  featureKey,
   state => ({ ...state, showLoading: true }),
 );
 export const fetchUsersSuccess = createHandler<State, { users: User[] }>(
   '[Users] Fetch Users Success',
-  stateKey,
+  featureKey,
   (state, { users }) => ({ ...state, users, showLoading: false }),
 );
 export const fetchUsersError = createHandler<State>(
   '[Users] Fetch Users Error',
-  stateKey,
+  featureKey,
   state => ({ ...state, users: [], showLoading: false }),
 );
 ````
@@ -219,8 +219,8 @@ If you are using React, install additional package by running `npm install --sav
 ### Handlers
 
 As already mentioned, handler is the component that merges the action and the reducer. You can create Juliette's handler by using `createHandler` function.
-This function has two required arguments `type` and `stateKey`. `type` is similar to action type in Redux and it needs to be unique on application
-level. `stateKey` is a property name in application state of state chunk that defined handler refers to. Let's see `createHandler` in action.
+This function has two required arguments `type` and `featureKey`. `type` is similar to action type in Redux and it needs to be unique on application
+level. `featureKey` is a property name in application state of state chunk that defined handler refers to. Let's see `createHandler` in action.
 
 ```typescript
 const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog', 'todos'); 
