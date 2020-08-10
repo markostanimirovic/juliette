@@ -8,7 +8,7 @@
 
 ## Table of Contents
 
-- [Description](#description)
+- [Overview](#overview)
   - [Reduced Boilerplate Without Reducer's Ifology](#reduced-boilerplate-without-reducers-ifology)
   - [Simplified Configuration](#simplified-configuration)
   - [Framework Agnostic](#framework-agnostic)
@@ -21,12 +21,10 @@
   - [Angular Plugin](#angular-plugin)
   - [React Plugin](#react-plugin)
 - [Examples](#examples)
-  - [Angular Example](#angular-example)
-  - [React Example](#react-example)
 - [Support](#support)
 - [License](#license)
 
-## Description
+## Overview
 
 Juliette is a reactive state management library inspired by [NgRx](https://ngrx.io/).
 It reduces Redux boilerplate, eliminates reducer's conditional branching, simplifies
@@ -304,11 +302,8 @@ EFFECTS_EXAMPLE: create todo handler, chaining handlers (updateCurrentPage -> fe
 
 ## Examples
 
-Check [juliette-examples](https://github.com/stanimirovic/juliette-examples) repository to see complete example projects.
-
-### Angular Example
-
-### React Example
+Take a look at [juliette-examples](https://github.com/stanimirovic/juliette-examples) repository to see the projects that use Juliette
+as a state management solution.
 
 ## Support
 
