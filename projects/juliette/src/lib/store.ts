@@ -4,33 +4,29 @@ import { Handler, Selector } from './models';
 import { debug } from './debug';
 
 export class Store<T> {
-  private _state: BehaviorSubject<T>;
-  private _handlers = new Subject<Handler<any, any>>();
+  private state: BehaviorSubject<T>;
+  private handlers = new Subject<Handler<any, any>>();
 
   state$: Observable<T>;
   handlers$: Observable<Handler<any, any>>;
 
   constructor(initialState: T) {
-    this._state = new BehaviorSubject(initialState);
-    this.state$ = this._state.asObservable();
-    this.handlers$ = this._handlers.asObservable();
-  }
-
-  get state(): T {
-    return this._state.value;
+    this.state = new BehaviorSubject(initialState);
+    this.state$ = this.state.asObservable();
+    this.handlers$ = this.handlers.asObservable();
   }
 
   dispatch(handler: Handler<any, any>): void {
     if (handler.reducer && handler.stateKey) {
-      const currentState = (this.state as any)[handler.stateKey];
+      const currentState = this.state.value[handler.stateKey as keyof T];
 
-      this._state.next({
-        ...this.state,
+      this.state.next({
+        ...this.state.value,
         [handler.stateKey]: handler.reducer(currentState, handler.payload),
       });
     }
 
-    this._handlers.next(handler);
+    this.handlers.next(handler);
   }
 
   select<K extends keyof T>(key: K): Observable<T[K]>;
