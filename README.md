@@ -278,8 +278,7 @@ const store = createStore(initialAppState, true);
 To dispatch handlers, the store provides `dispatch` function.
 
 ```typescript
-store.dispatch(TodosHandlers.fetchTodos());
-store.dispatch(TodosHandlers.fetchTodosSuccess({ todos });
+store.dispatch(fromTodos.fetchTodos());
 ````
 
 There are two ways to get the application state. In both cases, you will get the state as an observable. First way is to get the entire
@@ -305,6 +304,14 @@ const todosState4$ = store.state$.pipe(map(state => state.todos));
 ````
 
 ### Effects
+
+If you need to perform a side effect when some handler is dispatched, Juliette effect is the right place to do that. This approach of handling
+side effects is introduced by NgRx team and it's more reactive and declarative than using Redux middlewares. Enough theory, let's move to the
+examples. To create a effect, Juliette provides `createEffect` function. It accepts an observable that returns new handler or nothing.
+
+```typescript
+const createTodo$
+````
 
 TODO write docs for:
 - effect for single handler (access to the payload, access to the store, return new handler, without return)
