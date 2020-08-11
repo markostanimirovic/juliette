@@ -267,35 +267,37 @@ const fetchTodosSuccess = createHandler<TodosState, { todos: Todo[] }>(
 
 ### Store
 
-To create the store, Juliette provides `createStore` function. It accepts initial application state as an argument. Second argument is `debugMode`
-and it's optional. You can enable `debugMode` when application is in development mode in order to log the state and handlers on every dispatch.
+To create the store, Juliette provides `createStore` function. It accepts the initial application state as the first argument.
+The second argument is `debugMode` and it's optional. You can enable debug mode when the application is in development mode
+in order to log the state and handlers on every dispatch.
 
 ```typescript
-const store = createStore(initialAppState, isDevMode);
+const store = createStore(initialAppState, true);
 ````
 
-To dispatch handlers, store provides `dispatch` function.
+To dispatch handlers, the store provides `dispatch` function.
 
 ```typescript
 store.dispatch(TodosHandlers.fetchTodos());
+store.dispatch(TodosHandlers.fetchTodosSuccess({ todos });
 ````
 
-There are two ways to get the application state. In both cases, you'll get the state as an observable.
-First is to get the whole state by using `state$` property from the store.
+There are two ways to get the application state. In both cases, you will get the state as an observable. First way is to get the entire
+state by using `state$` property from the store.
 
 ```typescript
 const appState$ = store.state$;
 ````
 
-Second option is to select partial state that you need for current view. For that purpose, Juliette's store provides `select` function.
-You can pass the name of state piece that you need or selector function that accepts state as an argument and returns selected stuff.
+Second option is to select a partial state. For this purpose, Juliette store provides `select` function. You can pass the key of the state
+piece that you need or a selector function that accepts the state as an argument and returns the selected chunk.
 
 ```typescript
 const todosState1$ = store.select('todos');
 const todosState2$ = store.select(state => state.todos);
 ````
 
-Another way to select state from the store is to use regular RxJS operators.
+Another way to select a state is to use regular RxJS operators.
 
 ```typescript
 const todosState3$ = store.state$.pipe(pluck('todos'));
