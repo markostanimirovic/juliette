@@ -1,16 +1,9 @@
-import { Store } from './store';
-import { Effect, EffectSource } from './models';
-import { Observable } from 'rxjs';
+import { Store } from "./store";
+import { Observable } from "rxjs";
+import { HANDLER_META_KEY } from "./constants";
 
-export const JULIETTE_EFFECT = 'Juliette Effect';
-
-export const createEffect = (source$: Observable<EffectSource>): Effect => ({
-  source$,
-  type: JULIETTE_EFFECT,
-});
-
-export const registerEffects = <T>(store: Store<T>, effects: Effect[]): void => {
-  effects.forEach(({ source$ }) =>
-    source$.subscribe(handler => handler && store.dispatch(handler)),
+export function registerEffects<T>(store: Store<T>, effects: Observable<any>[]): void {
+  effects.forEach(effect$ =>
+    effect$.subscribe(handler => handler?.metaKey === HANDLER_META_KEY && store.dispatch(handler))
   );
-};
+}

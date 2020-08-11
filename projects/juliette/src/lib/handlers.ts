@@ -1,8 +1,9 @@
 import { HandlerCreator, Reducer } from './models';
+import { HANDLER_META_KEY } from './constants';
 
 export function createHandler(type: string): HandlerCreator;
 
-export function createHandler<P>(type: string): HandlerCreator<null, P>;
+export function createHandler<P>(type: string): HandlerCreator<null, NonNullable<P>>;
 
 export function createHandler<S = null>(
   type: string,
@@ -19,7 +20,7 @@ export function createHandler<S = null, P = null>(
 export function createHandler(
   type: string,
   featureKey?: string,
-  reducer?: Reducer<any, any>,
+  reducer?: any,
 ): HandlerCreator<any, any> {
-  return (payload?: any) => ({ type, featureKey, reducer, payload });
+  return (payload: any) => ({ type, featureKey, reducer, payload, metaKey: HANDLER_META_KEY });
 }

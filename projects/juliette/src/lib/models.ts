@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-
 export type NullOrUndefined = null | undefined;
 
 export type Reducer<
@@ -15,8 +13,9 @@ export type Reducer<
 export interface Handler<S = null, P = null> {
   type: string;
   featureKey?: string;
-  reducer?: Reducer<S, P>;
-  payload?: P;
+  reducer: Reducer<S, P>;
+  payload: P;
+  metaKey: string;
 }
 
 export type HandlerCreator<
@@ -28,10 +27,3 @@ export type HandlerCreator<
 export type Dispatch = (handler: Handler<any, any>) => void;
 
 export type Selector<S, R> = (state: S) => R;
-
-export type EffectSource = Handler<any, any> | void;
-
-export interface Effect {
-  source$: Observable<EffectSource>;
-  type: string;
-}
