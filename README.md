@@ -306,9 +306,10 @@ const todosState4$ = store.state$.pipe(map(state => state.todos));
 
 ### Effects
 
-EFFECTS_DESCRIPTION
-
-EFFECTS_EXAMPLE: create todo handler, chaining handlers (updateCurrentPage -> fetch)
+TODO write docs for:
+- effect for single handler (access to the payload, access to the store, return new handler, without return)
+- return multiple handlers from effect
+- effect for multiple handlers (updateCurrentPage, updateSearch -> fetch)
 
 ### Angular Plugin
 
