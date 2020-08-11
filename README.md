@@ -33,8 +33,8 @@ Juliette is a TypeScript friendly library and can be used in Angular, React or a
 
 ### Reduced Boilerplate Without Reducer's Ifology
 
-Juliette reduces Redux boilerplate by merging action and reducer into one component called handler.
-To better understand the benefits of handler, let's first look at how actions and reducers are defined by using NgRx.
+Juliette reduces Redux boilerplate by merging the action and the reducer into one component called handler.
+To better understand the benefits of the handler, let's first look at how actions and reducers are defined by using NgRx.
 
 <details>
   <summary><b>Old NgRx Approach</b></summary>
@@ -91,7 +91,7 @@ export function reducer(state = initialState, action: UsersActions.Action): Stat
 ```
 </details>
 
-TypeScript code above shows the old NgRx syntax and it is pretty similar to traditional Redux approach.
+TypeScript code above shows the old NgRx syntax and it is pretty similar to the traditional Redux approach.
 As you can see, it's too much code for three simple actions. Then, NgRx team introduced a new way
 to define actions and reducers.
 
@@ -139,7 +139,7 @@ export const reducer = createReducer(
 ````
 </details>
 
-With new NgRx syntax, less amount of code is needed to define actions and reducer. Conditional
+With new NgRx syntax, less amount of code is needed to define actions and reducers. Conditional
 branching for actions in the reducer is masked by the `on` operator, but it is still present.
 Let's now look at how the same example is implemented using Juliette handlers.
 
@@ -218,40 +218,52 @@ If you are using React, install additional package by running `npm install --sav
 
 ### Handlers
 
-As already mentioned, handler is the component that merges the action and the reducer. You can create Juliette's handler by using `createHandler` function.
-This function has two required arguments `type` and `featureKey`. `type` is similar to action type in Redux and it needs to be unique on application
-level. `featureKey` is a property name in application state of state chunk that defined handler refers to. Let's see `createHandler` in action.
+As already mentioned, handler is the component that merges the action and the reducer. You can create the handler by using `createHandler`
+function and there are four different ways to do this. Let's look at the simplest first.
 
 ```typescript
-const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog', 'todos'); 
+const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog'); 
 ````
 
-Third argument of `createHandler` is a reducer function and it's optional. You can pass it when state needs to be updated on handler dispatch.
+`createHandler` requires only `type` as an argument. `type` is similar to Redux action type and must be unique at the application
+level. Another case is when handler requires a payload whose type must be passed as a generic argument.
 
 ```typescript
-const fetchTodos = createHandler('[Todos] Fetch Todos', 'todos', state => ({ ...state, showLoading: true }));
+const createTodo = createHandler<{ todo: Todo }>('[Todos] Create Todo');
 ````
 
-If you try compile the code above, you'll get compilation error. That's because `createHandler` function is strongly typed in order to avoid mistakes. You
-need to pass type of todos state chunk as generic argument.
+The third case is when the handler needs state changes. Then, you need to pass `featureKey` as a second argument. `featureKey` is the key of the state piece
+from the application state to which the defined handler refers. The third argument is a function that accepts the old state and returns a new state, similar
+to the reducer from Redux.
 
 ```typescript
-const fetchTodos = createHandler<TodosState>('[Todos] Fetch Todos', 'todos', state => ({ ...state, showLoading: true }));
-````
-
-`createHandler` function has two signatures. First is when defined handler doesn't have payload, and second is when it has. Payload type needs to be
-passed as second generic argument in order to prevent passing wrong payload to the defined handler on dispatch.
-Reducer function is optional argument in second signature too.
-
-```typescript
-const createTodo = createHandler<TodosState, { todo: Todo }>('[Todos] Create Todo', 'todos');
-
-const updateTodosCurrentPage = createHandler<TodosState, { currentPage: number }>(
-  '[Todos] Update Todos Current Page',
-  'todos',
-  (state, { currentPage }) => ({ ...state, currentPage }),
+const fetchTodos = createHandler(
+  '[Todos] Fetch Todos',
+  todosFeatureKey,
+  state => ({ ...state, showLoading: true }),
 );
-```` 
+````
+
+If you try compile the code above, you will get a compilation error. That is because `createHandler` function is strongly typed in order to avoid
+potential mistakes. To fix the error, you need to pass the type of todos state as a generic argument.
+
+```typescript
+const fetchTodos = createHandler<TodosState>(
+  '[Todos] Fetch Todos',
+  todosFeatureKey,
+  state => ({ ...state, showLoading: true }),
+);
+````
+
+The last case is when handler needs both, the payload and the reducer. Let's see it in action.
+
+```typescript
+const fetchTodosSuccess = createHandler<TodosState, { todos: Todo[] }>(
+  '[Todos] Fetch Todos Success',
+  todosFeatureKey,
+  (state, { todos }) => ({ ...state, todos }),
+);
+````
 
 ### Store
 
@@ -276,7 +288,7 @@ const appState$ = store.state$;
 ````
 
 Second option is to select partial state that you need for current view. For that purpose, Juliette's store provides `select` function.
-You can pass the name of state chunk that you need or selector function that accepts state as an argument and returns selected stuff.
+You can pass the name of state piece that you need or selector function that accepts state as an argument and returns selected stuff.
 
 ```typescript
 const todosState1$ = store.select('todos');
