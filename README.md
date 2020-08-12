@@ -9,7 +9,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Reduced Boilerplate Without Reducer's Ifology](#reduced-boilerplate-without-reducers-ifology)
+  - [Reduced Boilerplate Without Conditional Branching](#reduced-boilerplate-without-conditional-branching)
   - [Simplified Configuration](#simplified-configuration)
   - [Framework Agnostic](#framework-agnostic)
 - [Architecture](#architecture)
