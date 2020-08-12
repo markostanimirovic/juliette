@@ -2,24 +2,21 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:juliette && ng build juliette-ng && npm run build:juliette-react",
+    "build": "npm run build:juliette && ng build juliette-ng --prod && npm run build:juliette-react",
     "build:juliette": "rm -rf dist/juliette && cd projects/juliette && tsc",
     "build:juliette-react": "rm -rf dist/juliette-react && cd projects/juliette-react && tsc",
-    "build:prod": "npm run build:juliette && ng build juliette-ng --prod && npm run build:juliette-react",
-    "test": "ng test",
-    "lint": "npm run prettier && npm run eslint",
-    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
-    "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
-    "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
-    "prettier": "prettier --check . --ignore-path .lintignore",
-    "prettier:fix": "prettier --write . --ignore-path .lintignore",
-    "update-version": "node scripts/update-version.js",
-    "publish-libs": "node scripts/publish.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-version": "node scripts/update-version",
+    "publish": "npm run build && node scripts/publish"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && npm run build:prod"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "!(*.md)": "prettier --write",
+    "*.{js,ts}": "eslint --fix"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +45,7 @@
     "eslint": "~7.5.0",
     "eslint-config-prettier": "~6.11.0",
     "husky": "~4.2.5",
+    "lint-staged": "~10.2.11",
     "ng-packagr": "^10.0.0",
     "prettier": "~2.0.5",
     "ts-node": "~8.3.0",

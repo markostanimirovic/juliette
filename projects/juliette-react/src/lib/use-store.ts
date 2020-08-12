@@ -8,7 +8,7 @@ export function useStore<T, R>(selector: Selector<T, R>): [R, Dispatch] {
   if (!store) throw new Error('Store is not provided! Use StoreContext to provide it.');
 
   const [state$, initialState] = useMemo(() => {
-    let initialState: any = null;
+    let initialState: R = null as any;
     const state$ = store.select(selector).pipe(distinctUntilChanged());
     state$.pipe(take(1)).subscribe(state => (initialState = state));
 

@@ -31,7 +31,7 @@ It reduces Redux boilerplate, eliminates reducer's conditional branching, simpli
 the configuration and introduces NgRx architecture into the framework-agnostic world.
 Juliette is a TypeScript friendly library and can be used in Angular, React or any JavaScript application.
 
-### Reduced Boilerplate Without Reducer's Ifology
+### Reduced Boilerplate Without Conditional Branching
 
 Juliette reduces Redux boilerplate by merging the action and the reducer into one component called handler.
 To better understand the benefits of the handler, let's first look at how actions and reducers are defined by using NgRx.
@@ -97,7 +97,7 @@ to define actions and reducers.
 
 <details>
   <summary><b>New NgRx Approach</b></summary>
-  
+
 ```typescript
 // users.actions.ts
 
@@ -136,7 +136,7 @@ export const reducer = createReducer(
     showLoading: false,
   })),
 );
-````
+```
 </details>
 
 With new NgRx syntax, less amount of code is needed to define actions and reducers. Conditional
@@ -176,7 +176,7 @@ export const fetchUsersError = createHandler<State>(
   featureKey,
   state => ({ ...state, users: [], showLoading: false }),
 );
-````
+```
 </details>
 
 As you can see, Juliette way is declarative. Also, the least amount of code is required to define the same logic.
@@ -205,7 +205,7 @@ Let's look at the diagram.
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
 and new state will be reflected in the view. After that, if the handler has a side effect, that effect will be performed. Lastly, if the effect
 returns a new handler, the execution process will be repeated.
- 
+
 ## Installation
 
 Run `npm install --save juliette` to install core Juliette library.
@@ -223,14 +223,14 @@ function and there are four different ways to do this. Let's look at the simples
 
 ```typescript
 const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog'); 
-````
+```
 
 `createHandler` requires only `type` as an argument. `type` is similar to Redux action type and must be unique at the application
 level. Another case is when handler requires a payload whose type must be passed as a generic argument.
 
 ```typescript
 const createTodo = createHandler<{ todo: Todo }>('[Todos] Create Todo');
-````
+```
 
 The third case is when the handler needs state changes. Then, you need to pass `featureKey` as a second argument. `featureKey` is the key of the state piece
 from the application state to which the defined handler refers. The third argument is a function that accepts the old state and returns a new state, similar
@@ -242,7 +242,7 @@ const fetchTodos = createHandler(
   todosFeatureKey,
   state => ({ ...state, showLoading: true }),
 );
-````
+```
 
 If you try compile the code above, you will get a compilation error. That is because `createHandler` function is strongly typed in order to avoid
 potential mistakes. To fix the error, you need to pass the type of todos state as a generic argument.
@@ -253,7 +253,7 @@ const fetchTodos = createHandler<TodosState>(
   todosFeatureKey,
   state => ({ ...state, showLoading: true }),
 );
-````
+```
 
 The last case is when handler needs both, the payload and the reducer. Let's see it in action.
 
@@ -263,7 +263,7 @@ const fetchTodosSuccess = createHandler<TodosState, { todos: Todo[] }>(
   todosFeatureKey,
   (state, { todos }) => ({ ...state, todos }),
 );
-````
+```
 
 ### Store
 
@@ -273,20 +273,20 @@ in order to log the state and handlers on every dispatch.
 
 ```typescript
 const store = createStore(initialAppState, true);
-````
+```
 
 To dispatch handlers, the store provides `dispatch` function.
 
 ```typescript
 store.dispatch(fromTodos.fetchTodos());
-````
+```
 
 There are two ways to get the application state. In both cases, you will get the state as an observable. First way is to get the entire
 state by using `state$` property from the store.
 
 ```typescript
 const appState$ = store.state$;
-````
+```
 
 Second option is to select a partial state. For this purpose, Juliette store provides `select` function. You can pass the key of the state
 piece that you need or a selector function that accepts the state as an argument and returns the selected chunk.
@@ -294,14 +294,14 @@ piece that you need or a selector function that accepts the state as an argument
 ```typescript
 const todosState1$ = store.select('todos');
 const todosState2$ = store.select(state => state.todos);
-````
+```
 
 Another way to select a state is to use regular RxJS operators.
 
 ```typescript
 const todosState3$ = store.state$.pipe(pluck('todos'));
 const todosState4$ = store.state$.pipe(map(state => state.todos));
-````
+```
 
 ### Effects
 
@@ -311,7 +311,7 @@ examples. To create a effect, Juliette provides `createEffect` function. It acce
 
 ```typescript
 const createTodo$
-````
+```
 
 TODO write docs for:
 - effect for single handler (access to the payload, access to the store, return new handler, without return)
