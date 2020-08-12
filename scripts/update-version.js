@@ -1,6 +1,7 @@
 const { execSync } = require('child_process');
 const { writeFileSync } = require('fs');
 const readline = require('readline');
+const os = require('os');
 const {
   julietteDirName,
   julietteNgDirName,
@@ -41,7 +42,10 @@ const updatePluginLibraryVersion = (libraryName, version) => {
   };
 
   console.log(`Updating ${libraryName} version...`);
-  writeFileSync(libraryPackageJsonPath, JSON.stringify(updatedLibraryPackageJson, null, 2));
+  writeFileSync(
+    libraryPackageJsonPath,
+    JSON.stringify(updatedLibraryPackageJson, null, 2) + os.EOL,
+  );
 };
 
 (async () => {
