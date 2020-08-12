@@ -1,5 +1,5 @@
 import { ClassProvider, InjectionToken, Type } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 export const fromClassesWithEffectsToClassProviders = (
   injectionToken: InjectionToken<any>,

@@ -1,4 +1,4 @@
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { MonoTypeOperatorFunction, OperatorFunction } from 'rxjs';
 import { Handler, HandlerCreator } from './models';
 
@@ -25,7 +25,15 @@ export function ofType(
 export function ofType(
   ...handlerCreators: HandlerCreator<any, any>[]
 ): MonoTypeOperatorFunction<Handler<any, any>> {
-  return filter((handler: Handler<any, any>) =>
-    handlerCreators.some(handlerCreator => handlerCreator(null).type === handler.type),
-  );
+  return source$ =>
+    source$.pipe(
+      filter(handler =>
+        handlerCreators.some(handlerCreator => handlerCreator(null).type === handler.type),
+      ),
+      map(handler => ({ ...handler, metaKey: null })),
+    );
+}
+
+export function toPayload<S, P>(): OperatorFunction<Handler<S, P>, P> {
+  return map(handler => handler.payload);
 }

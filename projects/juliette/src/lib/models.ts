@@ -11,11 +11,11 @@ export type Reducer<
 > = R;
 
 export interface Handler<S = null, P = null> {
+  metaKey: string | null;
   type: string;
   featureKey?: string;
   reducer: Reducer<S, P>;
   payload: P;
-  metaKey: string;
 }
 
 export type HandlerCreator<

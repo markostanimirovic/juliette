@@ -22,5 +22,5 @@ export function createHandler(
   featureKey?: string,
   reducer?: any,
 ): HandlerCreator<any, any> {
-  return (payload: any) => ({ type, featureKey, reducer, payload, metaKey: HANDLER_META_KEY });
+  return (payload: any) => ({ metaKey: HANDLER_META_KEY, type, featureKey, reducer, payload });
 }
