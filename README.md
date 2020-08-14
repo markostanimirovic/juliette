@@ -1,10 +1,8 @@
 [![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/stanimirovic/juliette)
 
-# Juliette
+# Juliette &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette?label=juliette%20npm)](https://www.npmjs.com/package/juliette) [![Juliette Ng NPM](https://img.shields.io/npm/v/juliette-ng?label=juliette-ng%20npm)](https://www.npmjs.com/package/juliette-ng) [![Juliette React NPM](https://img.shields.io/npm/v/juliette-react?label=juliette-react%20npm)](https://www.npmjs.com/package/juliette-react)
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
-
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette?label=juliette%20npm)](https://www.npmjs.com/package/juliette) [![Juliette Ng NPM](https://img.shields.io/npm/v/juliette-ng?label=juliette-ng%20npm)](https://www.npmjs.com/package/juliette-ng) [![Juliette React NPM](https://img.shields.io/npm/v/juliette-react?label=juliette-react%20npm)](https://www.npmjs.com/package/juliette-react) [![Juliette Downloads](https://img.shields.io/npm/dt/juliette.svg?label=juliette%20downloads)](https://npmcharts.com/compare/juliette?interval=30) [![Juliette Ng Downloads](https://img.shields.io/npm/dt/juliette-ng.svg?label=juliette-ng%20downloads)](https://npmcharts.com/compare/juliette-ng?interval=30) [![Juliette React Downloads](https://img.shields.io/npm/dt/juliette-react.svg?label=juliette-react%20downloads)](https://npmcharts.com/compare/juliette-react?interval=30)
 
 ## Table of Contents
 
