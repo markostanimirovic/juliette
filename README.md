@@ -311,7 +311,7 @@ To create an effect, create an observable that returns new handler or nothing.
 
 EFFECT_WITHOUT_PAYLOAD_AND_RETURN
 ```typescript
-showCreateTodoDialog$ = store.handlers$.pipe(
+const showCreateTodoDialog$ = store.handlers$.pipe(
   ofType(fromTodos.showCreateTodoDialog),
   tap(() => todosService.showCreateTodoDialog()),
 );
@@ -319,7 +319,7 @@ showCreateTodoDialog$ = store.handlers$.pipe(
 
 EFFECT_WITH_PAYLOAD
 ```typescript
-createTodo$ = store.handlers$.pipe(
+const createTodo$ = store.handlers$.pipe(
   ofType(fromTodos.createTodo),
   switchMap(({ payload }) => todosService.createTodo(payload.todo)),
 );
@@ -327,7 +327,7 @@ createTodo$ = store.handlers$.pipe(
 
 EFFECT_WITH_PAYLOAD_USING_TO_PAYLOAD
 ```typescript
-createTodo$ = store.handlers$.pipe(
+const createTodo$ = store.handlers$.pipe(
   ofType(fromTodos.createTodo),
   toPayload(),
   switchMap(({ todo }) => todosService.createTodo(todo)),
@@ -336,7 +336,7 @@ createTodo$ = store.handlers$.pipe(
 
 EFFECT_RETURNS_HANDLER+READ_FROM_STORE
 ```typescript
-fetchTodos$ = store.handlers$.pipe(
+const fetchTodos$ = store.handlers$.pipe(
   ofType(fromTodos.fetchTodos),
   withLatestFrom(store.select(fromTodos.featureKey)),
   switchMap(([, { search, currentPage, itemsPerPage }]) =>
@@ -350,7 +350,7 @@ fetchTodos$ = store.handlers$.pipe(
 
 EFFECT_CHAINING+LISTEN_TO_MULTIPLE_HANDLERS
 ```typescript
-invokeFetchTodos$ = store.handlers$.pipe(
+const invokeFetchTodos$ = store.handlers$.pipe(
   ofType(fromTodos.updateSearch, fromTodos.updateCurrentPage, fromTodos.updateItemsPerPage),
   map(() => fromTodos.fetchTodos()),
 );
@@ -358,13 +358,18 @@ invokeFetchTodos$ = store.handlers$.pipe(
 
 RETURN_MULTIPLE_HANDLERS
 ```typescript
-resetPagination$ = store.handlers$.pipe(
+const resetPagination$ = store.handlers$.pipe(
   ofType(fromTodos.resetPagination),
   switchMap(() => [
     fromTodos.updateCurrentPage({ currentPage: 1 }),
     fromTodos.updateItemsPerPage({ itemsPerPage: 10 }),
   ]),
 );
+```
+
+REGISTER_EFFECTS
+```typescript
+registerEffects(store, [showCreateTodoDialog$, createTodo$, fetchTodos$, invokeFetchTodos$, resetPagination$]);
 ```
 
 ### Angular Plugin
