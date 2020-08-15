@@ -237,7 +237,7 @@ to the reducer from Redux.
 ```typescript
 const fetchTodos = createHandler(
   '[Todos] Fetch Todos',
-  todosFeatureKey,
+  featureKey,
   state => ({ ...state, showLoading: true }),
 );
 ```
@@ -246,9 +246,9 @@ If you try compile the code above, you will get a compilation error. That is bec
 potential mistakes. To fix the error, you need to pass the type of todos state as a generic argument.
 
 ```typescript
-const fetchTodos = createHandler<TodosState>(
+const fetchTodos = createHandler<State>(
   '[Todos] Fetch Todos',
-  todosFeatureKey,
+  featureKey,
   state => ({ ...state, showLoading: true }),
 );
 ```
@@ -256,9 +256,9 @@ const fetchTodos = createHandler<TodosState>(
 The last case is when handler needs both, the payload and the reducer. Let's see it in action.
 
 ```typescript
-const fetchTodosSuccess = createHandler<TodosState, { todos: Todo[] }>(
+const fetchTodosSuccess = createHandler<State, { todos: Todo[] }>(
   '[Todos] Fetch Todos Success',
-  todosFeatureKey,
+  featureKey,
   (state, { todos }) => ({ ...state, todos, showLoading: false }),
 );
 ```
@@ -303,18 +303,69 @@ const todosState4$ = store.state$.pipe(map(state => state.todos));
 
 ### Effects
 
-If you need to perform a side effect when some handler is dispatched, Juliette effect is the right place to do that. This approach of handling
+If you need to perform a side effect when some handler is dispatched, effect component is the right place to do that. This approach of handling
 side effects is introduced by NgRx team and it's more reactive and declarative than using Redux middlewares. Enough theory, let's move to the
-examples. To create a effect, Juliette provides `createEffect` function. It accepts an observable that returns new handler or nothing.
+examples.
 
+To create an effect, create an observable that returns new handler or nothing.
+
+EFFECT_WITHOUT_PAYLOAD_AND_RETURN
 ```typescript
-const createTodo$
+showCreateTodoDialog$ = store.handlers$.pipe(
+  ofType(fromTodos.showCreateTodoDialog),
+  tap(() => todosService.showCreateTodoDialog()),
+);
 ```
 
-TODO write docs for:
-- effect for single handler (access to the payload, access to the store, return new handler, without return)
-- return multiple handlers from effect
-- effect for multiple handlers (updateCurrentPage, updateSearch -> fetch)
+EFFECT_WITH_PAYLOAD
+```typescript
+createTodo$ = store.handlers$.pipe(
+  ofType(fromTodos.createTodo),
+  switchMap(({ payload }) => todosService.createTodo(payload.todo)),
+);
+```
+
+EFFECT_WITH_PAYLOAD_USING_TO_PAYLOAD
+```typescript
+createTodo$ = store.handlers$.pipe(
+  ofType(fromTodos.createTodo),
+  toPayload(),
+  switchMap(({ todo }) => todosService.createTodo(todo)),
+);
+```
+
+EFFECT_RETURNS_HANDLER+READ_FROM_STORE
+```typescript
+fetchTodos$ = store.handlers$.pipe(
+  ofType(fromTodos.fetchTodos),
+  withLatestFrom(store.select(fromTodos.featureKey)),
+  switchMap(([, { search, currentPage, itemsPerPage }]) =>
+    todosService.getTodos(search, currentPage, itemsPerPage).pipe(
+      map(todos => fromTodos.fetchTodosSuccess({ todos })),
+      catchError(() => of(fromTodos.fetchTodosError())),
+    ),
+  ),
+);
+```
+
+EFFECT_CHAINING+LISTEN_TO_MULTIPLE_HANDLERS
+```typescript
+invokeFetchTodos$ = store.handlers$.pipe(
+  ofType(fromTodos.updateSearch, fromTodos.updateCurrentPage, fromTodos.updateItemsPerPage),
+  map(() => fromTodos.fetchTodos()),
+);
+```
+
+RETURN_MULTIPLE_HANDLERS
+```typescript
+resetPagination$ = store.handlers$.pipe(
+  ofType(fromTodos.resetPagination),
+  switchMap(() => [
+    fromTodos.updateCurrentPage({ currentPage: 1 }),
+    fromTodos.updateItemsPerPage({ itemsPerPage: 10 }),
+  ]),
+);
+```
 
 ### Angular Plugin
 
