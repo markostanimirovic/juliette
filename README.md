@@ -369,7 +369,13 @@ const resetPagination$ = store.handlers$.pipe(
 
 REGISTER_EFFECTS
 ```typescript
-registerEffects(store, [showCreateTodoDialog$, createTodo$, fetchTodos$, invokeFetchTodos$, resetPagination$]);
+registerEffects(store, [
+  showCreateTodoDialog$,
+  createTodo$,
+  fetchTodos$,
+  invokeFetchTodos$,
+  resetPagination$,
+]);
 ```
 
 ### Angular Plugin
