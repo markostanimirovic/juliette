@@ -259,7 +259,7 @@ The last case is when handler needs both, the payload and the reducer. Let's see
 const fetchTodosSuccess = createHandler<TodosState, { todos: Todo[] }>(
   '[Todos] Fetch Todos Success',
   todosFeatureKey,
-  (state, { todos }) => ({ ...state, todos }),
+  (state, { todos }) => ({ ...state, todos, showLoading: false }),
 );
 ```
 
