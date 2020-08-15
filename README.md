@@ -303,16 +303,16 @@ const todosState4$ = store.state$.pipe(map(state => state.todos));
 
 ### Effects
 
-If you need to perform a side effect when some handler is dispatched, the effect component is the right place to do that. This approach of processing
+If you need to perform a side effect when some handler is dispatched, the effect component is the right place to do that. This approach to managing
 side effects was introduced by the NgRx team and is more reactive and declarative than the use of Redux middleware. To create an effect, create a RxJS
 observable that returns a new handler, any other value or nothing. If a new handler is returned, Juliette will dispatch it when the task within
 the effect is completed. Otherwise, the returned value will be ignored. Unlike NgRx, where you need to use `createEffect` function and pass
 an additional configuration if you want the effect not to return a new handler, with Juliette it will be done automatically. Enough theory, let's move
 on to examples.
 
-Juliette store provides `handlers$` stream that will emit a new value every time any handler is dispatched. If you need to do a side effect when some
-handler is dispatched, you can filter `handlers$` stream by using `ofType` operator and pass that handler as an argument. Then, the operators bellow
-the `ofType` will be executed only when passed handler is dispatched.
+Juliette store provides `handlers$` stream that will emit a new value every time when any handler is dispatched. If you need to perform a side effect
+when some handler is dispatched, you can filter `handlers$` stream by using `ofType` operator and pass that handler as an argument. Then, the operators
+chained after the `ofType` operator will be executed only when passed handler is dispatched.
 
 ```typescript
 const showCreateTodoDialog$ = store.handlers$.pipe(
@@ -340,8 +340,8 @@ const createTodo$ = store.handlers$.pipe(
 );
 ```
 
-When the effect needs data from the current state, you can use `withLatestFrom` operator. Also, if you need to dispatch a new handler when the effect
-task is complete, you can return it from the last operator in the chain.
+When the effect needs data from the store, you can use `withLatestFrom` operator. If you need to dispatch a new handler when the effect task
+is completed, you can return it from the last operator in the chain.
 
 ```typescript
 const fetchTodos$ = store.handlers$.pipe(
@@ -356,11 +356,15 @@ const fetchTodos$ = store.handlers$.pipe(
 );
 ```
 
-`ofType` operator can accept multiple handlers as arguments, which allows multiple handlers to be listened to in the same effect.
+Also, `ofType` operator can accept a sequence of handlers as an argument. This allows multiple handlers to be listened to in the same effect.
 
 ```typescript
 const invokeFetchTodos$ = store.handlers$.pipe(
-  ofType(fromTodos.updateSearch, fromTodos.updateCurrentPage, fromTodos.updateItemsPerPage),
+  ofType(
+    fromTodos.updateSearch,
+    fromTodos.updateCurrentPage,
+    fromTodos.updateItemsPerPage,
+  ),
   map(() => fromTodos.fetchTodos()),
 );
 ```
