@@ -303,15 +303,16 @@ const todosState4$ = store.state$.pipe(map(state => state.todos));
 
 ### Effects
 
-If you need to perform a side effect when some handler is dispatched, effect component is the right place to do that. This approach of handling
-side effects is introduced by NgRx team and it's more reactive and declarative than using Redux middlewares. To create an effect, create RxJS
-observable that returns a new handler, any other value or nothing. If new handler is returned, Juliette will dispatch it when task in the effect
-is done. Otherwise, returned value will be ignored. Unlike NgRx, where you need to use `createEffect` function and pass additional configuration
-if you want the effect not to return a new handler, with Juliette it will be done automatically. Enough theory, let's move to the examples.
+If you need to perform a side effect when some handler is dispatched, the effect component is the right place to do that. This approach of processing
+side effects was introduced by the NgRx team and is more reactive and declarative than the use of Redux middleware. To create an effect, create a RxJS
+observable that returns a new handler, any other value or nothing. If a new handler is returned, Juliette will dispatch it when the task within
+the effect is completed. Otherwise, the returned value will be ignored. Unlike NgRx, where you need to use `createEffect` function and pass
+an additional configuration if you want the effect not to return a new handler, with Juliette it will be done automatically. Enough theory, let's move
+on to examples.
 
-Juliette store provides `handlers$` stream which will emit a new value everytime when any handler is dispatched. If you need to perform
-the side effect when some handler is dispatched, you can filter `handlers$` stream by using `ofType` operator and pass that handler as an argument.
-Then, tasks bellow the `ofType` will be executed only when passed handler is dispatched.
+Juliette store provides `handlers$` stream that will emit a new value every time any handler is dispatched. If you need to do a side effect when some
+handler is dispatched, you can filter `handlers$` stream by using `ofType` operator and pass that handler as an argument. Then, the operators bellow
+the `ofType` will be executed only when passed handler is dispatched.
 
 ```typescript
 const showCreateTodoDialog$ = store.handlers$.pipe(
@@ -320,16 +321,16 @@ const showCreateTodoDialog$ = store.handlers$.pipe(
 );
 ```
 
-If passed handler has a payload, you can access it the next operator's callback as an argument.
+If passed handler has a payload, you can access it in the next operator's callback as an argument.
 
 ```typescript
 const createTodo$ = store.handlers$.pipe(
   ofType(fromTodos.createTodo),
-  switchMap(({ payload }) => todosService.createTodo(payload.todo)),
+  switchMap(handler => todosService.createTodo(handler.payload.todo)),
 );
 ```
 
-Juliette also provides `toPayload` operator, that will extract the payload from dispatched handler. 
+Juliette also provides `toPayload` operator that will extract the payload from the dispatched handler. 
 
 ```typescript
 const createTodo$ = store.handlers$.pipe(
@@ -339,8 +340,8 @@ const createTodo$ = store.handlers$.pipe(
 );
 ```
 
-When the effect needs data from the current state, you can use `withLatestFrom` operator. Also, if you need to dispatch a new handler
-when task in the effect is done, you can return it in last operator.
+When the effect needs data from the current state, you can use `withLatestFrom` operator. Also, if you need to dispatch a new handler when the effect
+task is complete, you can return it from the last operator in the chain.
 
 ```typescript
 const fetchTodos$ = store.handlers$.pipe(
@@ -355,7 +356,7 @@ const fetchTodos$ = store.handlers$.pipe(
 );
 ```
 
-Also, `ofType` operator can accept the sequence of handlers. That provides to listen to the multiple handlers inside of the same effect.
+`ofType` operator can accept multiple handlers as arguments, which allows multiple handlers to be listened to in the same effect.
 
 ```typescript
 const invokeFetchTodos$ = store.handlers$.pipe(
@@ -364,7 +365,7 @@ const invokeFetchTodos$ = store.handlers$.pipe(
 );
 ```
 
-When the effect needs to dispatch multiple handlers, you can return them as array by using `switchMap` or `mergeMap` operators.
+When the effect needs to dispatch multiple handlers, you can return them in array by using `switchMap` or `mergeMap` operators.
 
 ```typescript
 const resetPagination$ = store.handlers$.pipe(
@@ -376,7 +377,7 @@ const resetPagination$ = store.handlers$.pipe(
 );
 ```
 
-In the end, to start up the effects machinery, use `registerEffects` function.
+Finally, use `registerEffects` function to start up the effects machinery.
 
 ```typescript
 registerEffects(store, [
