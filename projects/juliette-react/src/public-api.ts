@@ -1,2 +1,2 @@
-export * from './lib/store-context';
-export * from './lib/use-store';
+export * from './lib/contexts';
+export * from './lib/hooks';
