@@ -17,7 +17,6 @@ export function useDispatch(): Dispatch {
 
 export function useSelector<T, R>(selector: Selector<T, R>): R {
   const store = useStore<T>();
-
   const [state$, initialState] = useMemo(() => {
     let initialState: R = null as any;
     const state$ = store.select(selector).pipe(distinctUntilChanged());
