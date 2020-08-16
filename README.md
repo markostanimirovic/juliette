@@ -395,6 +395,71 @@ registerEffects(store, [
 
 ### Angular Plugin
 
+JulietteNg library has additional functionalities for using Juliette in Angular way. Instead of `createStore` function, JulietteNg provides
+`StoreModule` in order to create the store and use it as an Angular service.
+
+```typescript
+@NgModule({
+  ...
+  imports: [
+    ...
+    StoreModule.forRoot(initialAppState, !environment.production),
+  ],
+})
+export class AppModule {}
+```
+
+Then, you can use the store inside of any component or service via Angular dependency injection.
+
+```typescript
+@Component({
+  ...
+})
+export class TodosComponent {
+  todosState$ = this.store.select(fromTodos.featureKey);
+
+  constructor(private store: Store<AppState>) {}
+
+  fetchTodos(): void {
+    this.store.dispatch(fromTodos.fetchTodos());
+  }
+}
+```
+
+Also, it's similar for the effects. There is `EffectsModule`.
+
+```typescript
+@NgModule({
+  ...
+  imports: [
+    ...
+    StoreModule.forRoot(initialAppState, !environment.production),
+    EffectsModule.forRoot([TodosEffects]),
+  ],
+})
+export class AppModule {}
+```
+
+Then, you can create the effects inside of class and use the benefits of dependency injection.
+
+```typescript
+@Injectable()
+export class TodosEffects {
+  fetchTodos$ = this.store.handlers$.pipe(
+    ofType(fromTodos.fetchTodos),
+    withLatestFrom(this.store.select(fromTodos.featureKey)),
+    switchMap(([, { search, currentPage, itemsPerPage }]) =>
+      this.todosService.getTodos(search, currentPage, itemsPerPage).pipe(
+        map(todos => fromTodos.fetchTodosSuccess({ todos })),
+        catchError(() => of(fromTodos.fetchTodosError())),
+      ),
+    ),
+  );
+
+  constructor(private store: Store<AppState>, private todosService: TodosService) {}
+}
+```
+
 ### React Plugin
 
 ## Examples
