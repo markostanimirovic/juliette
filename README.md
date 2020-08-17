@@ -19,6 +19,7 @@
   - [Angular Plugin](#angular-plugin)
   - [React Plugin](#react-plugin)
 - [Examples](#examples)
+- [V1.0.0 To-Do List](#v100-to-do-list)
 - [Support](#support)
 - [License](#license)
 
@@ -468,6 +469,12 @@ export class TodosEffects {
 
 Take a look at [juliette-examples](https://github.com/stanimirovic/juliette-examples) repository to see the projects that use Juliette
 as a state management solution.
+
+## V1.0.0 To-Do List
+
+- (Juliette) Selector composition
+- (Juliette) State immutability runtime checks
+- (JulietteNg) Lazy loading modules
 
 ## Support
 
