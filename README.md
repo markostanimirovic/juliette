@@ -189,7 +189,7 @@ You don't need to register reducers to the store anymore!
 ### Framework Agnostic
 
 Core features of Juliette are implemented in pure TypeScript. The library is small sized and has RxJS as the only production dependency.
-All framework specific stuff is in separate libraries. There are two plugin libraries available, for Angular and for React. They provide core
+All framework specific stuff is in separate libraries. Two plugin libraries are available, for Angular and for React. They provide core
 functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
 be native.
 
@@ -291,15 +291,15 @@ Second option is to select a partial state. For this purpose, Juliette store pro
 piece that you need or a selector function that accepts the state as an argument and returns the selected chunk.
 
 ```typescript
-const todosState1$ = store.select('todos');
-const todosState2$ = store.select(state => state.todos);
+const todosState1$ = store.select(fromTodos.featureKey);
+const todosState2$ = store.select(state => state[fromTodos.featureKey]);
 ```
 
 Another way to select a state is to use regular RxJS operators.
 
 ```typescript
-const todosState3$ = store.state$.pipe(pluck('todos'));
-const todosState4$ = store.state$.pipe(map(state => state.todos));
+const todosState3$ = store.state$.pipe(pluck(fromTodos.featureKey));
+const todosState4$ = store.state$.pipe(map(state => state[fromTodos.featureKey]));
 ```
 
 ### Effects
@@ -465,6 +465,45 @@ export class TodosEffects {
 
 ### React Plugin
 
+JulietteReact library contains custom hooks for easier state accessibility within the React components. To use them, provide the store via `StoreContext`.
+
+```typescript
+ReactDOM.render(
+  <StoreContext.Provider value={store}>
+    <App />
+  </StoreContext.Provider>,
+  document.getElementById('root'),
+);
+```
+
+JulietteReact provides `useSelector` hook that accepts the selector function and returns the selected state and `useDispatch` hook that returns the dispatch
+function.
+
+```typescript
+const selectTodos = (state: AppState) => state[fromTodos.stateKey];
+
+function Todos() {
+  const todosState = useSelector(selectTodos);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <button onClick={() => dispatch(fromTodos.fetchTodos())}>
+        Fetch Todos
+      </button>
+      {todosState.showLoading && <p>Loading...</p>}
+      ...
+    </div>
+  );
+}
+```
+
+If you need the entire store within the component, there is `useStore` hook.
+
+```typescript
+const store = useStore<AppState>();
+```
+
 ## Examples
 
 Take a look at [juliette-examples](https://github.com/stanimirovic/juliette-examples) repository to see the projects that use Juliette
@@ -472,9 +511,9 @@ as a state management solution.
 
 ## V1.0.0 To-Do List
 
-- (Juliette) Selector composition
-- (Juliette) State immutability runtime checks
-- (JulietteNg) Lazy loading modules
+- **\[Juliette]** Selector composition
+- **\[Juliette]** State immutability runtime checks
+- **\[JulietteNg]** Support for lazy loading feature modules
 
 ## Support
 
