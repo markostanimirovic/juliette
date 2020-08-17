@@ -396,7 +396,7 @@ registerEffects(store, [
 ### Angular Plugin
 
 JulietteNg library has additional functionalities for using Juliette in the Angular way. Instead of creating the store via `createStore` function,
-JulietteNg provides `StoreModule` to do it.
+it provides `StoreModule` to do so.
 
 ```typescript
 @NgModule({
@@ -441,7 +441,7 @@ It's similar for the effects. Instead of `registerEffects` function, there is `E
 export class AppModule {}
 ```
 
-`forRoot` method from `Effects` module accepts the array of classes with effects. Declaring the effects within the classes, you can use all benefits
+`forRoot` method from `EffectsModule` accepts an array of classes with effects. By creating effects within the class, you can use all the benefits
 of dependency injection.
 
 ```typescript
