@@ -476,8 +476,7 @@ ReactDOM.render(
 );
 ```
 
-JulietteReact provides `useSelector` hook that accepts the selector function and returns the selected state and `useDispatch` hook that returns the dispatch
-function.
+This plugin provides `useSelector` hook that accepts the selector function and `useDispatch` hook that returns the dispatch function.
 
 ```typescript
 const selectTodos = (state: AppState) => state[fromTodos.stateKey];
@@ -511,9 +510,9 @@ as a state management solution.
 
 ## V1.0.0 To-Do List
 
-- **\[Juliette]** Selector composition
-- **\[Juliette]** State immutability runtime checks
-- **\[JulietteNg]** Support for lazy loading feature modules
+- Selector composition
+- State immutability runtime checks
+- Support for lazy loading feature modules
 
 ## Support
 
