@@ -4,6 +4,8 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
+<img alt="Juliette in Action" src="https://i.ibb.co/XJYB8HN/juliette-in-action.gif" width="700px" />
+
 ## Table of Contents
 
 - [Overview](#overview)
