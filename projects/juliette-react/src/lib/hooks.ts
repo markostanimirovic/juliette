@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from './contexts';
 import { Store, Dispatch, Selector } from 'juliette';
 import { distinctUntilChanged, skip, take } from 'rxjs/operators';
@@ -12,7 +12,7 @@ export function useStore<T = any>(): Store<T> {
 
 export function useDispatch(): Dispatch {
   const store = useStore();
-  return store.dispatch.bind(store);
+  return useCallback(store.dispatch.bind(store), [store]);
 }
 
 export function useSelector<T, R>(selector: Selector<T, R>): R {
