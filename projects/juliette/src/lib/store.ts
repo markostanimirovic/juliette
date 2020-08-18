@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Handler, Selector } from './models';
-import { debug } from './debug';
+import { log } from './log';
 
 export class Store<T> {
   private state: BehaviorSubject<T>;
@@ -41,9 +41,9 @@ export class Store<T> {
   }
 }
 
-export const createStore = <T>(initialState: T, debugMode = false): Store<T> => {
+export const createStore = <T>(initialState: T, devMode = false): Store<T> => {
   const store = new Store(initialState);
-  if (debugMode) debug(store);
+  if (devMode) log(store);
 
   return store;
 };

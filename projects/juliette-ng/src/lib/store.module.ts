@@ -1,9 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { createStore, Store } from 'juliette';
-import { DEBUG_MODE, INITIAL_STATE } from './tokens';
+import { DEV_MODE, INITIAL_STATE } from './tokens';
 
-export function createStoreFactory<T>(initialState: T, debugMode: boolean): Store<T> {
-  return createStore(initialState, debugMode);
+export function createStoreFactory<T>(initialState: T, devMode: boolean): Store<T> {
+  return createStore(initialState, devMode);
 }
 
 @NgModule()
@@ -11,16 +11,16 @@ export class StoreRootModule {}
 
 @NgModule()
 export class StoreModule {
-  static forRoot<T>(initialState: T, debugMode = false): ModuleWithProviders<StoreRootModule> {
+  static forRoot<T>(initialState: T, devMode = false): ModuleWithProviders<StoreRootModule> {
     return {
       ngModule: StoreRootModule,
       providers: [
         { provide: INITIAL_STATE, useValue: initialState },
-        { provide: DEBUG_MODE, useValue: debugMode },
+        { provide: DEV_MODE, useValue: devMode },
         {
           provide: Store,
           useFactory: createStoreFactory,
-          deps: [INITIAL_STATE, DEBUG_MODE],
+          deps: [INITIAL_STATE, DEV_MODE],
         },
       ],
     };

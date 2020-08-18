@@ -4,7 +4,7 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
-<img alt="Juliette in Action" src="https://i.ibb.co/XJYB8HN/juliette-in-action.gif" width="700px" />
+<img alt="Juliette in Action" src="https://i.ibb.co/XJYB8HN/juliette-in-action.gif" width="600" />
 
 ## Table of Contents
 
@@ -69,22 +69,22 @@ import * as UsersActions from './users.actions';
 
 export interface State {
   users: User[];
-  showLoading: boolean;
+  loading: boolean;
 }
 
 const initialState: State = {
   users: [],
-  showLoading: false,
+  loading: false,
 };
 
 export function reducer(state = initialState, action: UsersActions.Action): State {
   switch (action.type) {
     case UsersActions.FETCH_USERS:
-      return { ...state, showLoading: true };
+      return { ...state, loading: true };
     case UsersActions.FETCH_USERS_SUCCESS:
-      return { ...state, users: action.payload, showLoading: false };
+      return { ...state, users: action.payload, loading: false };
     case UsersActions.FETCH_USERS_ERROR:
-      return { ...state, users: [], showLoading: false };
+      return { ...state, users: [], loading: false };
     default:
       return state;
   }
@@ -115,26 +115,26 @@ import * as UsersActions from './users.actions';
 
 export interface State {
   users: User[];
-  showLoading: boolean;
+  loading: boolean;
 }
 
 const initialState: State = {
   users: [],
-  showLoading: false,
+  loading: false,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(UsersActions.fetchUsers, state => ({ ...state, showLoading: true })),
+  on(UsersActions.fetchUsers, state => ({ ...state, loading: true })),
   on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
     ...state,
     users,
-    showLoading: false,
+    loading: false,
   })),
   on(UsersActions.fetchUsersError, state => ({
     ...state,
     users: [],
-    showLoading: false,
+    loading: false,
   })),
 );
 ```
@@ -154,28 +154,28 @@ export const featureKey = 'users';
 
 export interface State {
   users: User[];
-  showLoading: boolean;
+  loading: boolean;
 }
 
 export const initialState: State = {
   users: [],
-  showLoading: false,
+  loading: false,
 };
 
 export const fetchUsers = createHandler<State>(
   '[Users] Fetch Users',
   featureKey,
-  state => ({ ...state, showLoading: true }),
+  state => ({ ...state, loading: true }),
 );
 export const fetchUsersSuccess = createHandler<State, { users: User[] }>(
   '[Users] Fetch Users Success',
   featureKey,
-  (state, { users }) => ({ ...state, users, showLoading: false }),
+  (state, { users }) => ({ ...state, users, loading: false }),
 );
 export const fetchUsersError = createHandler<State>(
   '[Users] Fetch Users Error',
   featureKey,
-  state => ({ ...state, users: [], showLoading: false }),
+  state => ({ ...state, users: [], loading: false }),
 );
 ```
 </details>
@@ -241,7 +241,7 @@ to the reducer from Redux.
 const fetchTodos = createHandler(
   '[Todos] Fetch Todos',
   featureKey,
-  state => ({ ...state, showLoading: true }),
+  state => ({ ...state, loading: true }),
 );
 ```
 
@@ -252,7 +252,7 @@ potential mistakes. To fix the error, you need to pass the type of todos state a
 const fetchTodos = createHandler<State>(
   '[Todos] Fetch Todos',
   featureKey,
-  state => ({ ...state, showLoading: true }),
+  state => ({ ...state, loading: true }),
 );
 ```
 
@@ -262,14 +262,14 @@ The last case is when handler needs both, the payload and the reducer. Let's see
 const fetchTodosSuccess = createHandler<State, { todos: Todo[] }>(
   '[Todos] Fetch Todos Success',
   featureKey,
-  (state, { todos }) => ({ ...state, todos, showLoading: false }),
+  (state, { todos }) => ({ ...state, todos, loading: false }),
 );
 ```
 
 ### Store
 
 To create the store, Juliette provides `createStore` function. It accepts the initial application state as the first argument.
-The second argument is `debugMode` and it's optional. You can enable debug mode when the application is in development mode
+The second argument is `devMode` and it's optional. You can enable it when the application is in development mode
 in order to log the state and handlers on every dispatch.
 
 ```typescript
@@ -492,7 +492,7 @@ function Todos() {
       <button onClick={() => dispatch(fromTodos.fetchTodos())}>
         Fetch Todos
       </button>
-      {todosState.showLoading && <p>Loading...</p>}
+      {todosState.loading && <p>Loading...</p>}
       ...
     </div>
   );
