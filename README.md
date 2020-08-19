@@ -461,10 +461,7 @@ export class TodosEffects {
     ),
   );
 
-  constructor(
-    private store: Store<AppState>,
-    private todosService: TodosService
-  ) {}
+  constructor(private store: Store<AppState>, private todosService: TodosService) {}
 }
 ```
 
