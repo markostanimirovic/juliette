@@ -223,7 +223,7 @@ As already mentioned, handler is the component that merges the action and the re
 function and there are four different ways to do this. Let's look at the simplest first.
 
 ```typescript
-const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog'); 
+const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog');
 ```
 
 `createHandler` requires only `type` as an argument. `type` is similar to Redux action type and must be unique at the application
@@ -461,7 +461,10 @@ export class TodosEffects {
     ),
   );
 
-  constructor(private store: Store<AppState>, private todosService: TodosService) {}
+  constructor(
+    private store: Store<AppState>,
+    private todosService: TodosService
+  ) {}
 }
 ```
 
@@ -481,10 +484,10 @@ ReactDOM.render(
 This plugin provides `useSelector` hook that accepts the selector function and `useDispatch` hook that returns the dispatch function.
 
 ```typescript
-const selectTodos = (state: AppState) => state[fromTodos.stateKey];
+const selectTodosState = (state: AppState) => state[fromTodos.stateKey];
 
 function Todos() {
-  const todosState = useSelector(selectTodos);
+  const todosState = useSelector(selectTodosState);
   const dispatch = useDispatch();
 
   return (
@@ -512,7 +515,7 @@ as a state management solution.
 
 ## V1.0.0 To-Do List
 
-- Selector composition
+- Selector composition ✔️
 - State immutability runtime checks
 - Support for lazy loading feature modules
 

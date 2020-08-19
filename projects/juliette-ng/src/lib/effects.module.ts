@@ -3,7 +3,7 @@ import { CLASSES_WITH_ROOT_EFFECTS } from './tokens';
 import {
   fromClassesWithEffectsToClassProviders,
   fromObjectsWithEffectsToEffects,
-} from './effects-mapper';
+} from './effects.mapper';
 import { registerEffects, Store } from 'juliette';
 
 @NgModule()
