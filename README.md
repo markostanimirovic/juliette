@@ -300,8 +300,14 @@ const todosState2$ = store.select(state => state[fromTodos.featureKey]);
 Another way to select a state is to use regular RxJS operators.
 
 ```typescript
-const todosState3$ = store.state$.pipe(pluck(fromTodos.featureKey));
-const todosState4$ = store.state$.pipe(map(state => state[fromTodos.featureKey]));
+const todosState3$ = store.state$.pipe(
+  pluck(fromTodos.featureKey),
+  distinctUntilChanged(),
+);
+const todosState4$ = store.state$.pipe(
+  map(state => state[fromTodos.featureKey]),
+  distinctUntilChanged(),
+);
 ```
 
 ### Effects
@@ -481,7 +487,7 @@ ReactDOM.render(
 This plugin provides `useSelector` hook that accepts the selector function and `useDispatch` hook that returns the dispatch function.
 
 ```typescript
-const selectTodosState = (state: AppState) => state[fromTodos.stateKey];
+const selectTodosState = (state: AppState) => state[fromTodos.featureKey];
 
 function Todos() {
   const todosState = useSelector(selectTodosState);

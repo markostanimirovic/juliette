@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Handler, Selector } from './models';
 import { log } from './log';
 
@@ -37,7 +37,7 @@ export class Store<T> {
     const mapFn =
       typeof keyOrSelector === 'function' ? keyOrSelector : (state: T) => state[keyOrSelector];
 
-    return this.state$.pipe(map<T, T[K] | R>(mapFn));
+    return this.state$.pipe(map<T, T[K] | R>(mapFn), distinctUntilChanged());
   }
 }
 

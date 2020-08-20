@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from './contexts';
 import { Store, Dispatch, Selector } from 'juliette';
-import { distinctUntilChanged, skip, take } from 'rxjs/operators';
+import { skip, take } from 'rxjs/operators';
 
 export function useStore<T = any>(): Store<T> {
   const store = useContext(StoreContext);
@@ -19,7 +19,7 @@ export function useSelector<T, R>(selector: Selector<T, R>): R {
   const store = useStore<T>();
   const [state$, initialState] = useMemo(() => {
     let initialState: R = null as any;
-    const state$ = store.select(selector).pipe(distinctUntilChanged());
+    const state$ = store.select(selector);
     state$.pipe(take(1)).subscribe(state => (initialState = state));
 
     return [state$, initialState];
