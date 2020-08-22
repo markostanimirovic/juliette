@@ -39,6 +39,10 @@ export class Store<T> {
 
     return this.state$.pipe(map<T, T[K] | R>(mapFn), distinctUntilChanged());
   }
+
+  addFeatureState(featureKey: keyof T, featureState: T[keyof T]): void {
+    this.state.next({ ...this.state.value, [featureKey]: featureState });
+  }
 }
 
 export const createStore = <T>(initialState: T, devMode = false): Store<T> => {

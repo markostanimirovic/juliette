@@ -1,6 +1,6 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { createStore, Store } from 'juliette';
-import { DEV_MODE, INITIAL_STATE } from './tokens';
+import { DEV_MODE, FEATURE_KEYS, FEATURE_STATES, INITIAL_STATE } from './tokens';
 
 export function createStoreFactory<T>(initialState: T, devMode: boolean): Store<T> {
   return createStore(initialState, devMode);
@@ -8,6 +8,17 @@ export function createStoreFactory<T>(initialState: T, devMode: boolean): Store<
 
 @NgModule()
 export class StoreRootModule {}
+
+@NgModule()
+export class StoreFeatureModule {
+  constructor(
+    store: Store<any>,
+    @Inject(FEATURE_KEYS) featureKeys: any[],
+    @Inject(FEATURE_STATES) featureStates: any[],
+  ) {
+    store.addFeatureState(featureKeys.pop(), featureStates.pop());
+  }
+}
 
 @NgModule()
 export class StoreModule {
@@ -22,6 +33,19 @@ export class StoreModule {
           useFactory: createStoreFactory,
           deps: [INITIAL_STATE, DEV_MODE],
         },
+      ],
+    };
+  }
+
+  static forFeature<T>(
+    featureKey: keyof T,
+    featureState: T[keyof T],
+  ): ModuleWithProviders<StoreFeatureModule> {
+    return {
+      ngModule: StoreFeatureModule,
+      providers: [
+        { provide: FEATURE_KEYS, multi: true, useValue: featureKey },
+        { provide: FEATURE_STATES, multi: true, useValue: featureState },
       ],
     };
   }
