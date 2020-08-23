@@ -1,8 +1,8 @@
 {
   "name": "juliette-ng",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "peerDependencies": {
-    "juliette": "0.9.0",
+    "juliette": "0.10.0",
     "@angular/core": "^10.0.5",
     "rxjs": "^6.5.5"
   },
