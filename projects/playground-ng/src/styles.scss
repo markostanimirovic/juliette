@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+.header {
+  margin-bottom: 15px;
+
+  > * {
+    margin-right: 15px;
+  }
+}
+
+.buffer-right {
+  margin-right: 15px;
+}

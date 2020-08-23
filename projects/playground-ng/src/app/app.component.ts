@@ -1,21 +1,14 @@
 import { Component } from '@angular/core';
-import { Store } from 'juliette';
-import { AppState } from './store/app-state';
-import { Observable } from 'rxjs';
-
-import * as fromUsers from './store/handlers/users.handlers';
 
 @Component({
   selector: 'pg-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: `
+    <div class="header">
+      <a class="buffer-right" routerLink="/users">Users</a>
+      <a class="buffer-right" routerLink="/feature1">Feature 1</a>
+      <a class="buffer-right" routerLink="/feature2">Feature 2</a>
+    </div>
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  viewModel$: Observable<fromUsers.State> = this.store.select(fromUsers.featureKey);
-
-  constructor(private store: Store<AppState>) {}
-
-  fetchUsers(): void {
-    this.store.dispatch(fromUsers.fetchUsers());
-  }
-}
+export class AppComponent {}

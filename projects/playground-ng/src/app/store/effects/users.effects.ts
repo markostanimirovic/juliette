@@ -3,8 +3,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { ofType, Store, toPayload } from 'juliette';
 import { UsersResource } from '../../core/resources/users.resource';
 import { AppState } from '../app-state';
-
-import * as fromUsers from '../handlers/users.handlers';
+import { fromUsers } from '../handlers';
 
 @Injectable()
 export class UsersEffects {

@@ -5,13 +5,16 @@ import { StoreModule, EffectsModule } from 'juliette-ng';
 import { initialAppState } from './store/app-state';
 import { environment } from '../environments/environment';
 import { UsersEffects } from './store/effects/users.effects';
+import { AppRoutingModule } from './app-routing.module';
+import { UsersComponent } from './containers/users.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UsersComponent],
   imports: [
     BrowserModule,
     StoreModule.forRoot(initialAppState, !environment.production),
     EffectsModule.forRoot([UsersEffects]),
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent],
 })

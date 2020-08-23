@@ -3,7 +3,7 @@ import { take, withLatestFrom } from 'rxjs/operators';
 import { Handler } from './models';
 
 export const log = <T>(store: Store<T>): void => {
-  store.state$.pipe(take(1)).subscribe(state => logState(state));
+  store.state$.pipe(take(1)).subscribe(logState);
 
   store.handlers$.pipe(withLatestFrom(store.state$)).subscribe(([handler, state]) => {
     logHandler(handler);

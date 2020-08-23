@@ -1,9 +1,7 @@
-import * as fromUsers from './handlers/users.handlers';
+import { fromUsers } from './handlers';
 
-export interface AppState {
-  [fromUsers.featureKey]: fromUsers.State;
-}
-
-export const initialAppState: AppState = {
+export const initialAppState = {
   [fromUsers.featureKey]: fromUsers.initialState,
 };
+
+export type AppState = typeof initialAppState;

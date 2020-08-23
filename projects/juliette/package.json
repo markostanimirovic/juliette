@@ -1,6 +1,6 @@
 {
   "name": "juliette",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "main": "public-api.js",
   "types": "public-api.d.ts",
   "peerDependencies": {
