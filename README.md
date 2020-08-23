@@ -520,7 +520,7 @@ as a state management solution.
 
 - Selector composition ✔️
 - State immutability runtime checks
-- Support for lazy loading feature modules
+- Support for lazy loading feature modules ✔️
 
 ## Support
 
