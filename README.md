@@ -444,13 +444,13 @@ It's similar for the effects. Instead of `registerEffects` function, there is `E
   imports: [
     ...
     StoreModule.forRoot(initialAppState, !environment.production),
-    EffectsModule.forRoot([TodosEffects]),
+    EffectsModule.register([TodosEffects]),
   ],
 })
 export class AppModule {}
 ```
 
-`forRoot` method from `EffectsModule` accepts an array of classes with effects. By creating effects within the class, you can use all the benefits
+`register` method from `EffectsModule` accepts an array of classes with effects. By creating effects within the class, you can use all the benefits
 of dependency injection.
 
 ```typescript
@@ -484,13 +484,11 @@ ReactDOM.render(
 );
 ```
 
-This plugin provides `useSelector` hook that accepts the selector function and `useDispatch` hook that returns the dispatch function.
+This plugin provides `useSelect` hook that accepts a selector function or feature key and `useDispatch` hook that returns the dispatch function.
 
 ```typescript
-const selectTodosState = (state: AppState) => state[fromTodos.featureKey];
-
 function Todos() {
-  const todosState = useSelector(selectTodosState);
+  const todosState = useSelect<AppState, fromTodos.State>(fromTodos.featureKey);
   const dispatch = useDispatch();
 
   return (

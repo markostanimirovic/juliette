@@ -42,8 +42,8 @@ export class Store<T> {
     return this.state$.pipe(map<T, T[K] | R>(mapFn), distinctUntilChanged());
   }
 
-  addFeatureState(featureKey: keyof T, featureState: T[keyof T]): void {
-    this.state.next({ ...this.state.value, [featureKey]: featureState });
+  addFeatureState(featureKey: keyof T, initialState: T[keyof T]): void {
+    this.state.next({ ...this.state.value, [featureKey]: initialState });
   }
 }
 

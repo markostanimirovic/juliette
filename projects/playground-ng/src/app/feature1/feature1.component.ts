@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from 'juliette';
-import { Feature1State, fromFeature1 } from './store';
+import { Feature1AppState, fromFeature1 } from './store';
 import { FormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -20,7 +20,7 @@ export class Feature1Component implements OnInit, OnDestroy {
   fooControl = new FormControl();
   state$ = this.store.select(fromFeature1.featureKey);
 
-  constructor(private store: Store<Feature1State>) {}
+  constructor(private store: Store<Feature1AppState>) {}
 
   ngOnInit(): void {
     this.fooControl.valueChanges

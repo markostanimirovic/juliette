@@ -15,11 +15,11 @@ export function useDispatch(): Dispatch {
   return useCallback(store.dispatch.bind(store), [store]);
 }
 
-export function useSelector<T, R extends T[keyof T]>(featureKey: keyof T): R;
+export function useSelect<T, R extends T[keyof T]>(featureKey: keyof T): R;
 
-export function useSelector<T, R>(selector: Selector<T, R>): R;
+export function useSelect<T, R>(selector: Selector<T, R>): R;
 
-export function useSelector<T, K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): T[K] | R {
+export function useSelect<T, K extends keyof T, R>(keyOrSelector: K | Selector<T, R>): T[K] | R {
   const store = useStore<T>();
   const [state$, initialState] = useMemo(() => {
     let initialState: T[K] | R = null as any;

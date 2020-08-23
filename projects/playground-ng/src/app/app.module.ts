@@ -13,7 +13,7 @@ import { UsersComponent } from './containers/users.component';
   imports: [
     BrowserModule,
     StoreModule.forRoot(initialAppState, !environment.production),
-    EffectsModule.forRoot([UsersEffects]),
+    EffectsModule.register([UsersEffects]),
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],

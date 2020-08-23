@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, ofType, toPayload } from 'juliette';
-import { Feature2State, fromFeature2 } from './index';
+import { Feature2AppState, fromFeature2 } from './index';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
@@ -11,5 +11,5 @@ export class Feature2Effects {
     tap(({ bar }) => console.log('barUpdated', bar)),
   );
 
-  constructor(private store: Store<Feature2State>) {}
+  constructor(private store: Store<Feature2AppState>) {}
 }

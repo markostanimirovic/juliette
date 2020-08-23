@@ -14,7 +14,7 @@ import { Feature2Effects } from './store/feature2.effects';
     ReactiveFormsModule,
     Feature2RoutingModule,
     StoreModule.forFeature(fromFeature2.featureKey, fromFeature2.initialState),
-    EffectsModule.forFeature([Feature2Effects]),
+    EffectsModule.register([Feature2Effects]),
   ],
 })
 export class Feature2Module {}
