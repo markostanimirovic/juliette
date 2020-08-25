@@ -1,4 +1,4 @@
-[![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/marko-stanimirovic/juliette)
+[![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/markostanimirovic/juliette)
 
 # Juliette &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette?label=juliette%20npm)](https://www.npmjs.com/package/juliette) [![Juliette Ng NPM](https://img.shields.io/npm/v/juliette-ng?label=juliette-ng%20npm)](https://www.npmjs.com/package/juliette-ng) [![Juliette React NPM](https://img.shields.io/npm/v/juliette-react?label=juliette-react%20npm)](https://www.npmjs.com/package/juliette-react) [![Downloads](https://img.shields.io/npm/dt/juliette)](https://npmcharts.com/compare/juliette,juliette-ng,juliette-react?interval=100)
 
@@ -511,7 +511,7 @@ const store = useStore<AppState>();
 
 ## Examples
 
-Take a look at [juliette-examples](https://github.com/marko-stanimirovic/juliette-examples) repository to see the projects that use Juliette
+Take a look at [juliette-examples](https://github.com/markostanimirovic/juliette-examples) repository to see the projects that use Juliette
 as a state management solution.
 
 ## V1.0.0 To-Do List

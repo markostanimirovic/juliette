@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ofType, Store, toPayload } from 'juliette';
 import { UsersResource } from '../../core/resources/users.resource';
-import { AppState } from '../app-state';
+import { AppState } from '../index';
 import { fromUsers } from '../handlers';
 
 @Injectable()

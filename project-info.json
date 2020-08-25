@@ -12,12 +12,12 @@
     "State Management"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/marko-stanimirovic/juliette#readme",
+  "homepage": "https://github.com/markostanimirovic/juliette#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marko-stanimirovic/juliette.git"
+    "url": "https://github.com/markostanimirovic/juliette.git"
   },
   "bugs": {
-    "url": "https://github.com/marko-stanimirovic/juliette/issues"
+    "url": "https://github.com/markostanimirovic/juliette/issues"
   }
 }

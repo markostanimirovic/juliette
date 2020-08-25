@@ -4,6 +4,7 @@ import { Feature1AppState, fromFeature1 } from './store';
 import { FormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { selectFooWithUsers } from './store/feature1.selectors';
 
 @Component({
   template: `
@@ -11,6 +12,10 @@ import { Subject } from 'rxjs';
       <input type="text" [formControl]="fooControl" />
       <br />
       Foo: {{ state.foo }}
+      <br />
+      <ol *ngIf="state.users.length > 0">
+        <li *ngFor="let user of state.users">{{ user.name }}</li>
+      </ol>
     </ng-container>
   `,
 })
@@ -18,7 +23,7 @@ export class Feature1Component implements OnInit, OnDestroy {
   private destroy = new Subject();
 
   fooControl = new FormControl();
-  state$ = this.store.select(fromFeature1.featureKey);
+  state$ = this.store.select(selectFooWithUsers);
 
   constructor(private store: Store<Feature1AppState>) {}
 

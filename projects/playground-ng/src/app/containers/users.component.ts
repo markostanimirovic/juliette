@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { fromUsers } from '../store/handlers';
 import { Store } from 'juliette';
-import { AppState } from '../store/app-state';
+import { AppState } from '../store';
+import { selectUsersState } from '../store/selectors';
 
 @Component({
   template: `
@@ -24,7 +24,7 @@ import { AppState } from '../store/app-state';
   `,
 })
 export class UsersComponent {
-  state$: Observable<fromUsers.State> = this.store.select(fromUsers.featureKey);
+  state$ = this.store.select(selectUsersState);
 
   constructor(private store: Store<AppState>) {}
 
