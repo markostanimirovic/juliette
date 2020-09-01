@@ -34,6 +34,7 @@
     "new-parens": "error",
     "no-bitwise": "off",
     "no-extra-boolean-cast": "off",
+    "no-prototype-builtins": "off",
     "no-restricted-imports": ["error", "rxjs/Rx"],
     "no-shadow": [
       "error",

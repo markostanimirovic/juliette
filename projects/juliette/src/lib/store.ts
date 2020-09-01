@@ -2,18 +2,18 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Handler, Selector } from './models';
 import { log } from './log';
+import { deepFreeze } from './helpers';
 
 export class Store<T> {
   private state: BehaviorSubject<T>;
   private handlers = new Subject<Handler<any, any>>();
 
   state$: Observable<T>;
-  handlers$: Observable<Handler<any, any>>;
+  handlers$ = this.handlers.asObservable();
 
   constructor(initialState: T) {
-    this.state = new BehaviorSubject(initialState);
+    this.state = new BehaviorSubject(deepFreeze(initialState));
     this.state$ = this.state.asObservable();
-    this.handlers$ = this.handlers.asObservable();
   }
 
   dispatch(handler: Handler<any, any>): void {
@@ -22,7 +22,7 @@ export class Store<T> {
 
       this.state.next({
         ...this.state.value,
-        [handler.featureKey]: handler.reducer(currentState, handler.payload),
+        [handler.featureKey]: handler.reducer(deepFreeze(currentState), handler.payload),
       });
     }
 
@@ -43,7 +43,7 @@ export class Store<T> {
   }
 
   addFeatureState(featureKey: keyof T, initialState: T[keyof T]): void {
-    this.state.next({ ...this.state.value, [featureKey]: initialState });
+    this.state.next({ ...this.state.value, [featureKey]: deepFreeze(initialState) });
   }
 }
 

@@ -519,7 +519,7 @@ as a state management solution.
 ## V1.0.0 To-Do List
 
 - Selector composition ✔️
-- State immutability runtime checks
+- State immutability runtime checks ✔️
 - Support for lazy loading feature modules ✔️
 
 ## Support
