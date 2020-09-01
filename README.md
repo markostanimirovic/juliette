@@ -2,7 +2,7 @@
 
 # Juliette
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette?label=juliette%20npm)](https://www.npmjs.com/package/juliette) [![Juliette Ng NPM](https://img.shields.io/npm/v/juliette-ng?label=juliette-ng%20npm)](https://www.npmjs.com/package/juliette-ng) [![Juliette React NPM](https://img.shields.io/npm/v/juliette-react?label=juliette-react%20npm)](https://www.npmjs.com/package/juliette-react) [![Downloads](https://img.shields.io/npm/dt/juliette)](https://npmcharts.com/compare/juliette,juliette-ng,juliette-react?interval=100)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Juliette NPM](https://img.shields.io/npm/v/juliette)](https://www.npmjs.com/package/juliette) [![Build Status](https://travis-ci.org/markostanimirovic/juliette.svg?branch=master)](https://travis-ci.org/markostanimirovic/juliette) [![Downloads](https://img.shields.io/npm/dt/juliette)](https://npmcharts.com/compare/juliette,juliette-ng,juliette-react?interval=100)
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 

@@ -4,5 +4,7 @@ node_js:
 cache:
   directories:
     - node_modules
+notifications:
+  email: false
 script:
   - npm run build
