@@ -199,11 +199,10 @@ be native.
 
 ## Architecture
 
-Juliette doesn't have a much less complex execution flow than NgRx, but one part of the architecture is different.
-Merging action and reducer into the handler will reduce the boilerplate and will not make a mess in complex systems.
-Let's look at the diagram.
+Juliette is a great solution for large-scale applications, because merging action and reducer into the handler will reduce the boilerplate,
+but won't make a mess in complex systems. Let's look at the diagram.
 
-![Juliette Architecture](https://i.ibb.co/nBK3Wk3/juliette-architecture.png)
+![Juliette Architecture](https://i.ibb.co/HhPCXVq/juliette-architecture.png)
 
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
 and new state will be reflected in the view. After that, if the handler has a side effect, that effect will be performed. Lastly, if the effect
