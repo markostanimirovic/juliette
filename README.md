@@ -202,11 +202,11 @@ be native.
 Juliette is a great solution for large-scale applications, because merging action and reducer into the handler will reduce the boilerplate,
 but won't make a mess in complex systems. Let's look at the diagram.
 
-![Juliette Architecture](https://i.ibb.co/HhPCXVq/juliette-architecture.png)
+![Juliette Architecture](https://i.ibb.co/GxcsWdK/juliette-architecture.png)
 
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
-and new state will be reflected in the view. After that, if the handler has a side effect, that effect will be performed. Lastly, if the effect
-returns a new handler, the execution process will be repeated.
+and new state will be reflected in the view through the selector. After that, if the handler has a side effect, that effect will be performed.
+Lastly, if the effect returns a new handler, the execution process will be repeated.
 
 ## Installation
 
@@ -290,8 +290,8 @@ state by using `state$` property from the store.
 const appState$ = store.state$;
 ```
 
-Second option is to select a partial state. For this purpose, Juliette store provides `select` function. You can pass the key of the state
-piece that you need or a selector function that accepts the state as an argument and returns the selected chunk.
+Second option is to select a partial state. For this purpose, Juliette store provides `select` function. You can pass the key of the feature state
+or a selector function that accepts the state as an argument and returns the selected slice.
 
 ```typescript
 const todosState1$ = store.select(fromTodos.featureKey);
@@ -309,6 +309,12 @@ const todosState4$ = store.state$.pipe(
   map(state => state[fromTodos.featureKey]),
   distinctUntilChanged(),
 );
+```
+
+In case you need to initialize a feature state on the fly, there is `addFeatureState` method.
+
+```typescript
+store.addFeatureState(fromTodos.featureKey, fromTodos.initialState);
 ```
 
 ### Effects
@@ -437,7 +443,20 @@ export class TodosComponent {
 }
 ```
 
-It's similar for the effects. Instead of `registerEffects` function, there is `EffectsModule`.
+To initialize the feature state in lazy-loaded module, use `forChild` method.
+
+```typescript
+@NgModule({
+  ...
+  imports: [
+    ...
+    StoreModule.forChild(fromTodos.featureKey, fromTodos.initialState),
+  ],
+})
+export class TodosModule {}
+```
+
+To register the effects, JulietteNg provides `EffectsModule`.
 
 ```typescript
 @NgModule({
