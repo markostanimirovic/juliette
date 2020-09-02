@@ -1,8 +1,7 @@
-import { createFeatureSelector, createSelector } from 'juliette';
+import { Selector, composeSelectors } from 'juliette';
 import { fromUsers } from '../handlers';
 import { AppState } from '../index';
 
-export const selectUsersState = createFeatureSelector<AppState, fromUsers.State>(
-  fromUsers.featureKey,
-);
-export const selectUsers = createSelector(selectUsersState, state => state.users);
+export const selectUsersState: Selector<AppState, fromUsers.State> = state =>
+  state[fromUsers.featureKey];
+export const selectUsers = composeSelectors([selectUsersState], state => state.users);

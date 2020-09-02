@@ -8,7 +8,7 @@
 
 <img alt="Juliette in Action" src="https://i.ibb.co/XJYB8HN/juliette-in-action.gif" width="600" />
 
-## Table of Contents
+## Contents
 
 - [Overview](#overview)
   - [Reduced Boilerplate Without Conditional Branching](#reduced-boilerplate-without-conditional-branching)
@@ -19,6 +19,7 @@
 - [Guide](#guide)
   - [Handlers](#handlers)
   - [Store](#store)
+  - [Selectors](#selectors)
   - [Effects](#effects)
   - [Angular Plugin](#angular-plugin)
   - [React Plugin](#react-plugin)
@@ -317,6 +318,31 @@ In case you need to initialize a feature state on the fly, there is `addFeatureS
 store.addFeatureState(fromTodos.featureKey, fromTodos.initialState);
 ```
 
+### Selectors
+
+Juliette provides `composeSelectors` function for selector composition. It accepts an array of selector functions as the first argument
+and composer function as the second argument.
+
+```typescript
+const selectTodosState: Selector<AppState, fromTodos.State> = state =>
+  state[fromTodos.featureKey];
+const selectAllTodos = composeSelectors([selectTodosState], state => state.todos);
+
+const selectInProgressTodos = composeSelectors(
+  [selectAllTodos],
+  todos => todos.filter(todo => todo.status === 'IN_PROGRESS'),
+);
+const selectDoneTodos = composeSelectors(
+  [selectAllTodos],
+  todos => todos.filter(todo => todo.status === 'DONE'), 
+);
+
+const selectInProgressAndDoneTodos = composeSelectors(
+  [selectInProgressTodos, selectDoneTodos],
+  (inProgressTodos, doneTodos) => [...inProgressTodos, ...doneTodos],
+);
+```
+
 ### Effects
 
 If you need to perform a side effect when some handler is dispatched, the effect component is the right place to do that. This approach to managing
@@ -443,14 +469,14 @@ export class TodosComponent {
 }
 ```
 
-To initialize the feature state in lazy-loaded module, use `forChild` method.
+To initialize the feature state in lazy-loaded module, use `forFeature` method.
 
 ```typescript
 @NgModule({
   ...
   imports: [
     ...
-    StoreModule.forChild(fromTodos.featureKey, fromTodos.initialState),
+    StoreModule.forFeature(fromTodos.featureKey, fromTodos.initialState),
   ],
 })
 export class TodosModule {}
@@ -463,15 +489,14 @@ To register the effects, JulietteNg provides `EffectsModule`.
   ...
   imports: [
     ...
-    StoreModule.forRoot(initialAppState, !environment.production),
     EffectsModule.register([TodosEffects]),
   ],
 })
 export class AppModule {}
 ```
 
-`register` method from `EffectsModule` accepts an array of classes with effects. By creating effects within the class, you can use all the benefits
-of dependency injection.
+`register` method from `EffectsModule` accepts an array of classes with effects and can be used in both, root and feature modules.
+By creating effects within the class, you can use all the benefits of dependency injection.
 
 ```typescript
 @Injectable()
@@ -495,7 +520,7 @@ export class TodosEffects {
 
 JulietteReact library contains custom hooks for easier state accessibility within the React components. To use them, provide the store via `StoreContext`.
 
-```typescript
+```typescript jsx
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <App />
@@ -506,7 +531,7 @@ ReactDOM.render(
 
 This plugin provides `useSelect` hook that accepts a selector function or feature key and `useDispatch` hook that returns the dispatch function.
 
-```typescript
+```typescript jsx
 function Todos() {
   const todosState = useSelect<AppState, fromTodos.State>(fromTodos.featureKey);
   const dispatch = useDispatch();
@@ -538,7 +563,7 @@ as a state management solution.
 
 - Selector composition ✔️
 - State immutability runtime checks ✔️
-- Support for lazy loading feature modules ✔️
+- Support for lazy-loaded modules ✔️
 
 ## Support
 
