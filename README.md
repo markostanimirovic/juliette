@@ -324,8 +324,7 @@ Juliette provides `composeSelectors` function for selector composition. It accep
 and composer function as the second argument.
 
 ```typescript
-const selectTodosState: Selector<AppState, fromTodos.State> = state =>
-  state[fromTodos.featureKey];
+const selectTodosState = (state: AppState) => state[fromTodos.featureKey];
 const selectAllTodos = composeSelectors([selectTodosState], state => state.todos);
 
 const selectInProgressTodos = composeSelectors(
