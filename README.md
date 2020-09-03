@@ -1,4 +1,6 @@
-[![Juliette Logo](./images/branding/julliete-logo.svg)](https://github.com/markostanimirovic/juliette)
+<a href="https://github.com/markostanimirovic/juliette">
+  <img alt="Juliette Logo" src="./images/branding/juliette-logo.svg" height="170" />
+</a>
 
 # Juliette
 
@@ -6,7 +8,7 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
-<img alt="Juliette in Action" src="https://i.ibb.co/XJYB8HN/juliette-in-action.gif" width="600" />
+<img alt="Juliette in Action" src="./images/juliette-in-action.gif" width="600" />
 
 ## Contents
 
@@ -203,7 +205,7 @@ be native.
 Juliette is a great solution for large-scale applications, because merging action and reducer into the handler will reduce the boilerplate,
 but won't make a mess in complex systems. Let's look at the diagram.
 
-![Juliette Architecture](https://i.ibb.co/GxcsWdK/juliette-architecture.png)
+![Juliette Architecture](./images/juliette-architecture.png)
 
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
 and new state will be reflected in the view through the selector. After that, if the handler has a side effect, that effect will be performed.

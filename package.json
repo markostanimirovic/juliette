@@ -5,6 +5,12 @@
     "build": "npm run build:juliette && ng build juliette-ng --prod && npm run build:juliette-react",
     "build:juliette": "rm -rf dist/juliette && cd projects/juliette && tsc",
     "build:juliette-react": "rm -rf dist/juliette-react && cd projects/juliette-react && tsc",
+    "lint": "npm run prettier && npm run eslint",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
+    "prettier": "prettier --check . --ignore-path .lintignore",
+    "prettier:fix": "prettier --write . --ignore-path .lintignore",
+    "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
+    "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-version": "node scripts/update-version",
     "publish": "npm run build && node scripts/publish"
@@ -15,7 +21,7 @@
     }
   },
   "lint-staged": {
-    "!(*.md)": "prettier --write",
+    "!(*ignore)": "prettier --write --ignore-path .lintignore",
     "*.{js,ts}": "eslint --fix"
   },
   "private": true,
