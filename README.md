@@ -1,4 +1,4 @@
-[![Juliette Logo](https://i.ibb.co/jDs1CB3/juliette-logo.jpg)](https://github.com/markostanimirovic/juliette)
+[![Juliette Logo](./images/branding/julliete-logo.svg)](https://github.com/markostanimirovic/juliette)
 
 # Juliette
 
