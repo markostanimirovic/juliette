@@ -205,7 +205,7 @@ be native.
 Juliette is a great solution for large-scale applications, because merging action and reducer into the handler will reduce the boilerplate,
 but won't make a mess in complex systems. Let's look at the diagram.
 
-![Juliette Architecture](./images/juliette-architecture.png)
+<img alt="Juliette Architecture" src="./images/juliette-architecture.png" width="650" />
 
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
 and new state will be reflected in the view through the selector. After that, if the handler has a side effect, that effect will be performed.
