@@ -2,9 +2,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:juliette && ng build juliette-ng --prod && npm run build:juliette-react",
-    "build:juliette": "rm -rf dist/juliette && cd projects/juliette && tsc",
-    "build:juliette-react": "rm -rf dist/juliette-react && cd projects/juliette-react && tsc",
+    "build": "node scripts/build juliette && ng build juliette-ng --prod && node scripts/build juliette-react",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
     "prettier": "prettier --check . --ignore-path .lintignore",
