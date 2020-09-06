@@ -12,13 +12,11 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
-<a href="https://github.com/markostanimirovic/juliette-examples">
-  <img
-    alt="Juliette in Action"
-    src="https://raw.githubusercontent.com/markostanimirovic/juliette/master/images/juliette-in-action.gif"
-    width="600"
-  />
-</a>
+<img
+  alt="Juliette in Action"
+  src="https://raw.githubusercontent.com/markostanimirovic/juliette/master/images/juliette-in-action.gif"
+  width="600"
+/>
 
 ## Contents
 
@@ -33,8 +31,7 @@
   - [Angular Plugin](#angular-plugin)
   - [React Plugin](#react-plugin)
 - [Examples](#examples)
-- [V1.0.0 To-Do List](#v100-to-do-list)
-- [Support](#support)
+- [Show Your Support](#show-your-support)
 - [License](#license)
 
 ## Overview
@@ -571,13 +568,7 @@ const store = useStore<AppState>();
 Take a look at [juliette-examples](https://github.com/markostanimirovic/juliette-examples) repository to see the projects that use Juliette
 as a state management solution.
 
-## V1.0.0 To-Do List
-
-- Selector composition ✔️
-- State immutability runtime checks ✔️
-- Support for lazy-loaded modules ✔️
-
-## Support
+## Show Your Support
 
 Give a ⭐ if you like Juliette 😎
 
