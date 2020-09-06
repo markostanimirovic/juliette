@@ -1,5 +1,9 @@
 <a href="https://github.com/markostanimirovic/juliette">
-  <img alt="Juliette Logo" src="./images/branding/juliette-logo.svg" height="170" />
+  <img
+    alt="Juliette Logo"
+    src="https://raw.githubusercontent.com/markostanimirovic/juliette/master/images/branding/juliette-logo.svg"
+    height="170"
+  />
 </a>
 
 # Juliette
@@ -8,14 +12,17 @@
 
 **Reactive State Management Powered by [RxJS](https://rxjs-dev.firebaseapp.com/)**
 
-<img alt="Juliette in Action" src="./images/juliette-in-action.gif" width="600" />
+<a href="https://github.com/markostanimirovic/juliette-examples">
+  <img
+    alt="Juliette in Action"
+    src="https://raw.githubusercontent.com/markostanimirovic/juliette/master/images/juliette-in-action.gif"
+    width="600"
+  />
+</a>
 
 ## Contents
 
 - [Overview](#overview)
-  - [Reduced Boilerplate Without Conditional Branching](#reduced-boilerplate-without-conditional-branching)
-  - [Simplified Configuration](#simplified-configuration)
-  - [Framework Agnostic](#framework-agnostic)
 - [Architecture](#architecture)
 - [Installation](#installation)
 - [Guide](#guide)
@@ -205,7 +212,11 @@ be native.
 Juliette is a great solution for large-scale applications, because merging action and reducer into the handler will reduce the boilerplate,
 but won't make a mess in complex systems. Let's look at the diagram.
 
-<img alt="Juliette Architecture" src="./images/juliette-architecture.png" width="650" />
+<img
+  alt="Juliette Architecture"
+  src="https://raw.githubusercontent.com/markostanimirovic/juliette/master/images/juliette-architecture.png"
+  width="650"
+/>
 
 When an event occurs on the view, it will dispatch the handler. Then, if the handler has a reducer function, it will be executed by the store
 and new state will be reflected in the view through the selector. After that, if the handler has a side effect, that effect will be performed.
