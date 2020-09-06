@@ -1,0 +1,5 @@
+/.idea
+/dist
+/images
+/node_modules
+*.md
