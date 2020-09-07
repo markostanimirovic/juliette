@@ -2,7 +2,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node scripts/build juliette && ng build juliette-ng --prod && node scripts/build juliette-react",
+    "build": "ts-node scripts/build juliette && ng build juliette-ng --prod && ts-node scripts/build juliette-react",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
     "prettier": "prettier --check . --ignore-path .lintignore",
@@ -10,8 +10,8 @@
     "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-version": "node scripts/update-version",
-    "publish": "npm run build && node scripts/publish"
+    "update-version": "ts-node scripts/update-version",
+    "publish": "npm run build && ts-node scripts/publish"
   },
   "husky": {
     "hooks": {

@@ -1,12 +1,12 @@
-const { execSync } = require('child_process');
-const { writeFileSync } = require('fs');
-const readline = require('readline');
-const os = require('os');
-const { join } = require('path');
-const { getProjectPath } = require('./paths');
+import { createInterface } from 'readline';
+import { join } from 'path';
+import { writeFileSync } from 'fs';
+import { execSync } from 'child_process';
+import { EOL } from 'os';
+import { getProjectPath } from './paths';
 
 const getVersionType = () => {
-  const versionTypeReadline = readline.createInterface({
+  const versionTypeReadline = createInterface({
     input: process.stdin,
     output: process.stdout,
   });
@@ -24,7 +24,7 @@ const getVersionType = () => {
   );
 };
 
-const updatePluginVersion = (pluginName, version) => {
+const updatePluginVersion = (pluginName: string, version: string) => {
   const packageJsonPath = join(getProjectPath(pluginName), 'package.json');
   const packageJson = require(packageJsonPath);
   const updatedPackageJson = {
@@ -37,7 +37,7 @@ const updatePluginVersion = (pluginName, version) => {
   };
 
   console.log(`Updating ${pluginName} version...`);
-  writeFileSync(packageJsonPath, JSON.stringify(updatedPackageJson, null, 2) + os.EOL);
+  writeFileSync(packageJsonPath, JSON.stringify(updatedPackageJson, null, 2) + EOL);
 };
 
 (async () => {

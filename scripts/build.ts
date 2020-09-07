@@ -1,6 +1,6 @@
-const { execSync } = require('child_process');
-const { join } = require('path');
-const { rootPath, getProjectPath, getDistPath } = require('./paths');
+import { execSync } from 'child_process';
+import { join } from 'path';
+import { getDistPath, getProjectPath, rootPath } from './paths';
 
 const projectName = process.argv[2] || 'juliette';
 
