@@ -449,8 +449,8 @@ registerEffects(store, [
 
 ### Angular Plugin
 
-JulietteNg library has additional functionalities for using Juliette in the Angular way. Instead of creating the store via `createStore` function,
-it provides `StoreModule` to do so.
+[JulietteNg](https://github.com/markostanimirovic/juliette/tree/master/projects/juliette-ng) library has additional functionalities for using
+Juliette in the Angular way. Instead of creating the store via `createStore` function, it provides `StoreModule` to do so.
 
 ```typescript
 @NgModule({
@@ -530,7 +530,8 @@ export class TodosEffects {
 
 ### React Plugin
 
-JulietteReact library contains custom hooks for easier state accessibility within the React components. To use them, provide the store via `StoreContext`.
+[JulietteReact](https://github.com/markostanimirovic/juliette/tree/master/projects/juliette-react) library contains custom hooks
+for easier state accessibility within the React components. To use them, provide the store via `StoreContext`.
 
 ```typescript jsx
 ReactDOM.render(
