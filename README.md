@@ -203,9 +203,10 @@ You don't need to register reducers to the store anymore!
 ### Framework Agnostic
 
 Core features of Juliette are implemented in pure TypeScript. The library is small-sized and has RxJS as the only production dependency.
-All framework specific stuff is in separate libraries. Two plugin libraries are available Angular and React. They provide core
-functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
-be native.
+All framework specific stuff is in separate libraries.
+
+We currently support Angular and React via dedicated plugins. They provide core functionalities adapted to the framework design.
+Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't be native.
 
 ## Architecture
 
