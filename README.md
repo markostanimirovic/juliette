@@ -46,7 +46,7 @@ Juliette is a TypeScript friendly library and can be used in Angular, React or a
 
 ### Reduced Boilerplate Without Conditional Branching
 
-Juliette reduces Redux boilerplate by merging the action and the reducer into one component called handler.
+Juliette reduces Redux boilerplate by merging the action, and the reducer into one component called a handler.
 To better understand the benefits of the handler, let's first look at how actions and reducers are defined by using NgRx.
 
 <details>
@@ -202,8 +202,8 @@ You don't need to register reducers to the store anymore!
 
 ### Framework Agnostic
 
-Core features of Juliette are implemented in pure TypeScript. The library is small sized and has RxJS as the only production dependency.
-All framework specific stuff is in separate libraries. Two plugin libraries are available, for Angular and for React. They provide core
+Core features of Juliette are implemented in pure TypeScript. The library is small-sized and has RxJS as the only production dependency.
+All framework specific stuff is in separate libraries. Two plugin libraries are available Angular and React. They provide core
 functionalities adapted to the framework design. Of course, Juliette can be used in Angular or React without plugins, but that way wouldn't
 be native.
 
@@ -226,15 +226,15 @@ Lastly, if the effect returns a new handler, the execution process will be repea
 
 Run `npm install --save juliette` to install core Juliette library.
 
-If you are using Angular, install additional package by running `npm install --save juliette-ng` command.
+For Angular, install an additional package by running `npm install --save juliette-ng` command.
 
-If you are using React, install additional package by running `npm install --save juliette-react` command.
+For React, install an additional package by running `npm install --save juliette-react` command.
 
 ## Guide
 
 ### Handlers
 
-As already mentioned, handler is the component that merges the action and the reducer. You can create the handler by using `createHandler`
+As already mentioned, the handler is the component that merges the action and the reducer. You can create the handler by using `createHandler`
 function and there are four different ways to do this. Let's look at the simplest first.
 
 ```typescript
@@ -242,7 +242,7 @@ const showCreateTodoDialog = createHandler('[Todos] Show Create Todo Dialog');
 ```
 
 `createHandler` requires only `type` as an argument. `type` is similar to Redux action type and must be unique at the application
-level. Another case is when handler requires a payload whose type must be passed as a generic argument.
+level. Another case is when the handler requires a payload whose type must be passed as a generic argument.
 
 ```typescript
 const createTodo = createHandler<{ todo: Todo }>('[Todos] Create Todo');
@@ -260,7 +260,7 @@ const fetchTodos = createHandler(
 );
 ```
 
-If you try compile the code above, you will get a compilation error. That is because `createHandler` function is strongly typed in order to avoid
+If you try to compile the code above, you will get a compilation error. That is because `createHandler` function is strongly typed in order to avoid
 potential mistakes. To fix the error, you need to pass the type of todos state as a generic argument.
 
 ```typescript
@@ -271,7 +271,7 @@ const fetchTodos = createHandler<State>(
 );
 ```
 
-The last case is when handler needs both, the payload and the reducer. Let's see it in action.
+The last case is when the handler needs both, the payload and the reducer. Let's see it in action.
 
 ```typescript
 const fetchTodosSuccess = createHandler<State, { todos: Todo[] }>(
