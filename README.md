@@ -41,7 +41,7 @@ To better understand the benefits of the handler, let's first look at how action
   <summary><b>Old NgRx Approach</b></summary>
 
 ```typescript
-// users.actions.t
+// users.actions.ts
 
 export const FETCH_USERS = '[Users] Fetch Users';
 export const FETCH_USERS_SUCCESS = '[Users] Fetch Users Success';
