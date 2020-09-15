@@ -235,7 +235,7 @@ For React, install an additional package by running `npm install --save juliette
 
 ### Handlers
 
-As already mentioned, the handler is the component that merges the action and the reducer. You can create the handler by using `createHandler`
+As already mentioned, handler is the component that merges the action and the reducer. You can create the handler by using `createHandler`
 function and there are four different ways to do this. Let's look at the simplest first.
 
 ```typescript
