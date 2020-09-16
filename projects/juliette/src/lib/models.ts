@@ -1,4 +1,4 @@
-export type NullOrUndefined = null | undefined;
+type NullOrUndefined = null | undefined;
 
 export type Reducer<
   S = null,
@@ -11,18 +11,18 @@ export type Reducer<
 > = R;
 
 export interface Handler<S = null, P = null> {
-  metaKey: string | null;
-  type: string;
-  featureKey?: string;
-  reducer: Reducer<S, P>;
-  payload: P;
+  readonly metaKey?: string;
+  readonly type: string;
+  readonly featureKey?: string;
+  readonly reducer: Reducer<S, P>;
+  readonly payload: P;
 }
 
 export type HandlerCreator<
   S = null,
   P = null,
   HC = P extends NullOrUndefined ? () => Handler<S, P> : (payload: P) => Handler<S, P>
-> = HC;
+> = HC & { type: string };
 
 export type Dispatch = (handler: Handler<any, any>) => void;
 

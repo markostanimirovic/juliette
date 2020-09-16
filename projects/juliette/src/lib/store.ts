@@ -5,11 +5,11 @@ import { log } from './log';
 import { deepFreeze } from './helpers';
 
 export class Store<T> {
-  private state: BehaviorSubject<T>;
-  private handlers = new Subject<Handler<any, any>>();
+  private readonly state: BehaviorSubject<T>;
+  private readonly handlers = new Subject<Handler<any, any>>();
 
-  state$: Observable<T>;
-  handlers$ = this.handlers.asObservable();
+  readonly state$: Observable<T>;
+  readonly handlers$ = this.handlers.asObservable();
 
   constructor(initialState: T) {
     this.state = new BehaviorSubject(deepFreeze(initialState));

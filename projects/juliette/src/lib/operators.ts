@@ -16,9 +16,13 @@ export function ofType(
   return source$ =>
     source$.pipe(
       filter(handler =>
-        handlerCreators.some(handlerCreator => handlerCreator(null).type === handler.type),
+        handlerCreators.some(handlerCreator => handlerCreator.type === handler.type),
       ),
-      map(handler => ({ ...handler, metaKey: null })),
+      map(handler => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { metaKey, ...handlerWithoutMetaKey } = handler;
+        return handlerWithoutMetaKey;
+      }),
     );
 }
 
