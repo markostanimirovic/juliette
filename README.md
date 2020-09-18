@@ -225,11 +225,11 @@ Lastly, if the effect returns a new handler, the execution process will be repea
 
 ## Installation
 
-Run `npm install --save juliette` to install core Juliette library.
+Run `npm install juliette` to install core Juliette library.
 
-For Angular, install an additional package by running `npm install --save juliette-ng` command.
+For Angular, install an additional package by running `npm install juliette-ng` command.
 
-For React, install an additional package by running `npm install --save juliette-react` command.
+For React, install an additional package by running `npm install juliette-react` command.
 
 ## Guide
 
