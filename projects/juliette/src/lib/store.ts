@@ -11,18 +11,21 @@ export class Store<T> {
   readonly state$: Observable<T>;
   readonly handlers$ = this.handlers.asObservable();
 
-  constructor(initialState: T) {
-    this.state = new BehaviorSubject(deepFreeze(initialState));
+  constructor(initialState: T, private readonly devMode: boolean) {
+    if (devMode) deepFreeze(initialState);
+
+    this.state = new BehaviorSubject(initialState);
     this.state$ = this.state.asObservable();
   }
 
   dispatch(handler: Handler<any, any>): void {
     if (handler.reducer && handler.featureKey) {
       const currentState = this.state.value[handler.featureKey as keyof T];
+      if (this.devMode) deepFreeze(currentState);
 
       this.state.next({
         ...this.state.value,
-        [handler.featureKey]: handler.reducer(deepFreeze(currentState), handler.payload),
+        [handler.featureKey]: handler.reducer(currentState, handler.payload),
       });
     }
 
@@ -43,12 +46,13 @@ export class Store<T> {
   }
 
   addFeatureState(featureKey: keyof T, initialState: T[keyof T]): void {
-    this.state.next({ ...this.state.value, [featureKey]: deepFreeze(initialState) });
+    if (this.devMode) deepFreeze(initialState);
+    this.state.next({ ...this.state.value, [featureKey]: initialState });
   }
 }
 
 export const createStore = <T>(initialState: T, devMode = false): Store<T> => {
-  const store = new Store(initialState);
+  const store = new Store(initialState, devMode);
   if (devMode) log(store);
 
   return store;
