@@ -46,7 +46,7 @@ Juliette is a TypeScript friendly library and can be used in Angular, React or a
 
 ### Reduced Boilerplate Without Conditional Branching
 
-Juliette reduces Redux boilerplate by merging the action, and the reducer into one component called a handler.
+Juliette reduces Redux boilerplate by merging the action, and the reducer into one component called handler.
 To better understand the benefits of the handler, let's first look at how actions and reducers are defined by using NgRx.
 
 <details>
@@ -286,7 +286,8 @@ const fetchTodosSuccess = createHandler<State, { todos: Todo[] }>(
 
 To create the store, Juliette provides `createStore` function. It accepts the initial application state as the first argument.
 The second argument is `devMode` and it's optional. You can enable it when the application is in development mode
-in order to log the state and handlers on every dispatch.
+in order to log the state and handlers on every dispatch. Also, when `devMode` is enabled, you'll get an error if
+try to mutate the state.
 
 ```typescript
 const store = createStore(initialAppState, true);
