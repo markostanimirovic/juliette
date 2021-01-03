@@ -10,7 +10,7 @@
       "prefix": "juliette",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/juliette-ng/tsconfig.lib.json",
             "project": "projects/juliette-ng/ng-package.json"
@@ -88,7 +88,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
