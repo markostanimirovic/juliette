@@ -14,3 +14,8 @@
 [![Downloads](https://img.shields.io/npm/dt/juliette-ng)](https://npmcharts.com/compare/juliette?interval=30)
 
 **Angular Plugin for [Juliette](https://github.com/markostanimirovic/juliette)**
+
+| Juliette         | Angular   |
+| ---------------- | --------- |
+| `>=1.3.0`        | `^11.0.0` |
+| `>=1.0.0 <1.3.0` | `^10.0.5` |

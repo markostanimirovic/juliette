@@ -11,8 +11,8 @@
     "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-version": "ts-node scripts/update-version",
-    "publish": "npm run build && ts-node scripts/publish"
+    "update-version": "cd scripts && ts-node update-version",
+    "publish": "npm run build && cd scripts && ts-node publish"
   },
   "husky": {
     "hooks": {

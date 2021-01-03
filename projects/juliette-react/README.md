@@ -14,3 +14,8 @@
 [![Downloads](https://img.shields.io/npm/dt/juliette-react)](https://npmcharts.com/compare/juliette-react?interval=30)
 
 **React Plugin for [Juliette](https://github.com/markostanimirovic/juliette)**
+
+| Juliette         | React      |
+| ---------------- | ---------- |
+| `>=1.3.0`        | `^17.0.0`  |
+| `>=1.0.0 <1.3.0` | `^16.13.1` |

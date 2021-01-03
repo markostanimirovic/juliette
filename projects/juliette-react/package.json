@@ -1,11 +1,11 @@
 {
   "name": "juliette-react",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "public-api.js",
   "types": "public-api.d.ts",
   "peerDependencies": {
-    "juliette": "1.2.0",
-    "react": "^16.13.1"
+    "juliette": "1.3.0",
+    "react": "^17.0.0"
   },
   "author": "Marko Stanimirović",
   "description": "React Plugin for Juliette",
