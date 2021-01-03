@@ -582,4 +582,4 @@ Give a ⭐ if you like Juliette 😎
 
 Juliette is [MIT licensed](./LICENSE).
 
-Copyright © 2020 Marko Stanimirović
+Copyright © 2020-2021 [Marko Stanimirović](https://github.com/markostanimirovic)
