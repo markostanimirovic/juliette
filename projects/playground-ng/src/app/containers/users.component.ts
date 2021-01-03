@@ -7,13 +7,9 @@ import { selectUsersState } from '../store/selectors';
 @Component({
   template: `
     <ng-container *ngIf="state$ | async as state">
-      <button (click)="fetchUsers()">
-        Fetch Users
-      </button>
+      <button (click)="fetchUsers()">Fetch Users</button>
 
-      <div *ngIf="state.loading; else users">
-        Loading...
-      </div>
+      <div *ngIf="state.loading; else users">Loading...</div>
 
       <ng-template #users>
         <div *ngFor="let user of state.users">
