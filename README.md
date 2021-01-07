@@ -336,7 +336,7 @@ store.addFeatureState(fromTodos.featureKey, fromTodos.initialState);
 ### Selectors
 
 Juliette provides `composeSelectors` function for selector composition. It accepts an array of selector functions as the first argument
-and composer function as the second argument.
+and composer function as the second argument. Selectors created with `composeSelectors` function are memoized.
 
 ```typescript
 const selectTodosState = (state: AppState) => state[fromTodos.featureKey];

@@ -8,8 +8,16 @@ export function composeSelectors<
   Result,
   State = Selectors extends Selector<infer T, unknown>[] ? T : never
 >(selectors: [...Selectors], composer: (...slices: Slices) => Result): Selector<State, Result> {
+  let cachedResult: Result;
+  let cachedSlices: Slices;
+
   return state => {
-    const slices = selectors.map(selector => selector(state)) as Slices;
-    return composer(...slices);
+    const newSlices = selectors.map(selector => selector(state)) as Slices;
+    if (!cachedResult || cachedSlices.some((cachedSlice, i) => cachedSlice !== newSlices[i])) {
+      cachedResult = composer(...newSlices);
+      cachedSlices = newSlices;
+    }
+
+    return cachedResult;
   };
 }
