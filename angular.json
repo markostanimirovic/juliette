@@ -44,9 +44,7 @@
         "@schematics/angular:interceptor": {
           "skipTests": true
         },
-        "@schematics/angular:module": {
-          "skipTests": true
-        },
+        "@schematics/angular:module": {},
         "@schematics/angular:pipe": {
           "skipTests": true
         },
@@ -69,13 +67,18 @@
             "main": "projects/playground-ng/src/main.ts",
             "polyfills": "projects/playground-ng/src/polyfills.ts",
             "tsConfig": "projects/playground-ng/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/playground-ng/src/favicon.ico",
               "projects/playground-ng/src/assets"
             ],
             "styles": ["projects/playground-ng/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -105,7 +108,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
